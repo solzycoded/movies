@@ -30,11 +30,11 @@ const fields = {
         required: true,
     },
     trailer:  {
-        type: URL,
+        type: String,
         required: true,
     },
     poster:  {
-        type: URL,
+        type: String,
         required: false,
     },
     release_year:  {

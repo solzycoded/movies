@@ -8,7 +8,7 @@ const fields = {
         required: true,
     },
     link: {
-        type: URL,
+        type: String,
         required: true,
     }
 };
