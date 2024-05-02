@@ -13,6 +13,13 @@ const data = {
         {name: "fantasy"},
         {name: "drama"},
     ],
+    languages: [
+        {name: "english"},
+        {name: "french"},
+        {name: "spanish"},
+        {name: "japanese"},
+        {name: "chinese"},
+    ],
 }
 
 export default data;
