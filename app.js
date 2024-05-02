@@ -6,6 +6,7 @@ import env from "./api/util/env.js";
 
 import typeRoutes from "./api/routes/TypeRoutes.js";
 import genreRoutes from "./api/routes/GenreRoutes.js";
+import languageRoutes from "./api/routes/LanguageRoutes.js";
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -29,3 +30,6 @@ app.use('/types', typeRoutes.router);
 
 // genre routes
 app.use('/genres', genreRoutes.router);
+
+// language routes
+app.use('/languages', languageRoutes.router);
