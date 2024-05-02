@@ -25,3 +25,6 @@ mongoose.connect((env.database.connection_string + env.database.name))
 /* ROUTES */
 // type routes
 app.use('/types', typeRoutes.router);
+
+// genre routes
+app.use('/genres', typeRoutes.router);
