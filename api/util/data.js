@@ -20,6 +20,15 @@ const data = {
         {name: "japanese"},
         {name: "chinese"},
     ],
+    actors: [
+        {name: "denzel washington"},
+        {name: "emma stone"},
+        {name: "idris elba"},
+        {name: "jackie chan"},
+        {name: "jet li"},
+        {name: "jean claude van-damme"},
+        {name: "will smith"},
+    ],
 }
 
 export default data;
