@@ -1,13 +1,16 @@
 import express from "express"
 import mongoose from "mongoose"
-import bodyParser from "body-parser";
+import bodyParser from "body-parser"
 
 import env from "./api/util/env.js";
 
+// routes
 import typeRoutes from "./api/routes/TypeRoutes.js";
 import genreRoutes from "./api/routes/GenreRoutes.js";
 import languageRoutes from "./api/routes/LanguageRoutes.js";
+import actorRoutes from "./api/routes/ActorRoutes.js";
 
+// INITIALIZE AND START APP INSTANCE
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
@@ -33,3 +36,6 @@ app.use('/genres', genreRoutes.router);
 
 // language routes
 app.use('/languages', languageRoutes.router);
+
+// actor routes
+app.use('/actors', actorRoutes.router);
