@@ -10,7 +10,7 @@ import genreRoutes from "./api/routes/GenreRoutes.js";
 import languageRoutes from "./api/routes/LanguageRoutes.js";
 import actorRoutes from "./api/routes/ActorRoutes.js";
 import movieRoutes from "./api/routes/MovieRoutes.js";
-import movieLinkRoutes from "./api/routes/MovieLink.js";
+import movieLinkRoutes from "./api/routes/MovieLinkRoutes.js";
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
