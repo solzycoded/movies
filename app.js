@@ -10,6 +10,7 @@ import genreRoutes from "./api/routes/GenreRoutes.js";
 import languageRoutes from "./api/routes/LanguageRoutes.js";
 import actorRoutes from "./api/routes/ActorRoutes.js";
 import movieRoutes from "./api/routes/MovieRoutes.js";
+import movieLinkRoutes from "./api/routes/MovieLink.js";
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
@@ -43,3 +44,6 @@ app.use('/actors', actorRoutes.router);
 
 // movie routes
 app.use('/movies', movieRoutes.router);
+
+// movie link routes
+app.use('/movie-links', movieLinkRoutes.router);
