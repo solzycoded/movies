@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import env from "./api/util/env.js";
 
 import typeRoutes from "./api/routes/TypeRoutes.js";
+import genreRoutes from "./api/routes/GenreRoutes.js";
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -27,4 +28,4 @@ mongoose.connect((env.database.connection_string + env.database.name))
 app.use('/types', typeRoutes.router);
 
 // genre routes
-app.use('/genres', typeRoutes.router);
+app.use('/genres', genreRoutes.router);
