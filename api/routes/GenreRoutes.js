@@ -7,8 +7,8 @@ const router = express.Router();
 router.post('/', GenreController.createGenre);
 
 // export routes
-let typeRoutes = {
+let genreRoutes = {
     router
 }
 
-export default typeRoutes;
+export default genreRoutes;
