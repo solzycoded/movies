@@ -21,7 +21,7 @@ const createDefaultTypes = async () => {
             console.log('Multiple types inserted');
         })
         .catch((err) => {
-            console.error('Error inserting records:', err);
+            // console.error('Error inserting records: ', err);
         });
 }
 

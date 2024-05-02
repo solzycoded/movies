@@ -7,14 +7,14 @@ const fields = {
         unique: true,
         validate: {
             validator: function(value) {
-                return this.constructor.findOne({ name: value })
-                    .then(existingUser => !existingUser);
+            return this.constructor.findOne({ name: value })
+                .then(existingUser => !existingUser);
             },
             // message: 'Name already exists'
         }
     },
 };
 
-const Type = Model.schemaModel("Type", fields);
+const Language = Model.schemaModel("Language", fields);
 
-export default Type;
+export default Language;

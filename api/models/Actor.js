@@ -1,7 +1,7 @@
 import Model from "./model.js";
 
 const fields = {
-    name: { 
+    name: {
         type: String, 
         required: true, 
         unique: true,
@@ -15,6 +15,6 @@ const fields = {
     },
 };
 
-const Type = Model.schemaModel("Type", fields);
+const Actor = Model.schemaModel("Actor", fields);
 
-export default Type;
+export default Actor;

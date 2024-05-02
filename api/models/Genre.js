@@ -15,6 +15,6 @@ const fields = {
     },
 };
 
-const Type = Model.schemaModel("Type", fields);
+const Genre = Model.schemaModel("Genre", fields);
 
-export default Type;
+export default Genre;
