@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { useNavigate } from 'react-router-dom';
 
 // import { MovieRating } from './MovieRating';
-// import { MovieGenreItem } from './MovieGenreItem';
+import MovieGenreItem from "./MovieGenreItem";
 // import { splitString } from '../common/util';
 
 import '../assets/css/MovieGridItem.css';
@@ -27,12 +27,11 @@ function MovieGridItem({ movie }) {
                 <div className="card-body">
                     <h5 className="card-title">{movie.name}</h5>
                     <p className="card-text">
-                        <a href="#">action</a>
-                        <a href="#">drama</a>
-                        <a href="#">sci-fi</a>
-                        {/* {genres.map((genre, i) => {
-                            return <MovieGenreItem genre={genre} key={i} />;
-                        })} */}
+                        {
+                            movie.genres.map((genre, i) => {
+                                return <MovieGenreItem genre={genre.name} key={i} />;
+                            })
+                        }
                     </p>
                     5.6
                     {/* <MovieRating rating={movie.rating} /> */}
