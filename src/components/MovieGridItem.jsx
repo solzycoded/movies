@@ -1,9 +1,8 @@
 import PropTypes from "prop-types"
 import { useNavigate } from 'react-router-dom';
 
-// import { MovieRating } from './MovieRating';
+import MovieRating from './MovieRating';
 import MovieGenreItem from "./MovieGenreItem";
-// import { splitString } from '../common/util';
 
 import '../assets/css/MovieGridItem.css';
 
@@ -13,7 +12,6 @@ function MovieGridItem({ movie }) {
     }
 
     const navigate = useNavigate();
-    // let genres = splitString(movie.genre);
 
     const openMovieDetails = (e) => {
         // e.preventDefault();
@@ -33,8 +31,7 @@ function MovieGridItem({ movie }) {
                             })
                         }
                     </p>
-                    5.6
-                    {/* <MovieRating rating={movie.rating} /> */}
+                    <MovieRating rating={movie.rating} />
                 </div>
             </div>
         </div>
