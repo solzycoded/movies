@@ -13,19 +13,21 @@ function MovieRating({ rating }) {
     }
 
     return (
-        <div className="d-flex justify-content-start">
-            <div className="d-flex" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title={rating}>
-                {
-                    rateMovie(rating).map(showRating => {
-                        return showRating;
-                    })
-                }
-            </div>
+        <>
+            <div className="d-flex justify-content-start" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title={rating}>
+                <div className="d-flex">
+                    {
+                        rateMovie(rating).map(showRating => {
+                            return showRating;
+                        })
+                    }
+                </div>
 
-            <div>
-                <p className="card-text ps-2 text-secondary">Rating</p>
+                <div>
+                    <p className="card-text ps-2 text-secondary">Rating</p>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

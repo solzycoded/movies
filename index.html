@@ -22,5 +22,17 @@
 
     <!-- REACT -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- APP SCRIPTS -->
+    <script>
+      (function() {
+        "use strict";
+      
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+      })()
+    </script>
   </body>
 </html>

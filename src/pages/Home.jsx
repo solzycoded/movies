@@ -1,12 +1,12 @@
-import MovieGridItem from "../components/MovieGridItem";
+import MovieGrid from "../components/MovieGrid";
 import util from "../common/util"
 
 function Home(){
-    let movie = util.data.movies[0];
+    let movies = util.data.movies;
 
     return (
         <>
-            <MovieGridItem movie={ movie } />
+            <MovieGrid movies={ movies } />
         </>
     )
 }

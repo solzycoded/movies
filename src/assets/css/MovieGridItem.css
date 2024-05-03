@@ -1,5 +1,3 @@
-.show-grid-item-poster {
-    min-height: 200px;
-    max-height: 250px;
-    object-fit: cover;
+.movie-grid-item-poster {
+    height: 200px;
 }

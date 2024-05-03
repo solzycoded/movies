@@ -4,6 +4,8 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 
+import "./assets/css/app.css"
+
 function App(){
   return (
     <BrowserRouter>

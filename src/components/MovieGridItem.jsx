@@ -1,4 +1,4 @@
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 
 import MovieRating from './MovieRating';
@@ -19,11 +19,11 @@ function MovieGridItem({ movie }) {
     };
 
     return (
-        <div className="col cursor-pointer" onClick={openMovieDetails} id={'movie-' + movie.id}>
-            <div className="card position-relative">
+        <div className="col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer mb-4" onClick={openMovieDetails} id={'movie-' + movie.id}>
+            <div className="card position-relative shadow-sm bg-body rounded border-0">
                 <img src={movie.poster} className="card-img-top movie-grid-item-poster" alt="movie poster" />
                 <div className="card-body">
-                    <h5 className="card-title">{movie.name}</h5>
+                    <h5 className="card-title text-capitalize">{movie.name}</h5>
                     <p className="card-text">
                         {
                             movie.genres.map((genre, i) => {
