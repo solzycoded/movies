@@ -13,7 +13,7 @@ const createMovie = async (req, res) => {
     }
 
     try {
-        const movie = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster });
+        const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster });
         const newMovie = await movie.save(); // create movie
 
         let movieId = newMovie._id;

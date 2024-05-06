@@ -10,7 +10,7 @@ const fields = {
                 return this.constructor.findOne({ name: value })
                     .then(existingUser => !existingUser);
             },
-            // message: 'Name already exists'
+            message: 'Name already exists'
         }
     },
 };
