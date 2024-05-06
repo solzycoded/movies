@@ -1,6 +1,14 @@
-(function() {
-    "use strict";
+// (function() {
+//     "use strict";
 
-    var exampleEl = document.getElementById('example')
-    var tooltip = new bootstrap.Tooltip(exampleEl, options)
-})()
+// })()
+
+const getElementById = (selector) => {
+    return document.getElementById(selector);
+}
+
+const App = {
+    getElementById,
+}
+
+export default App;

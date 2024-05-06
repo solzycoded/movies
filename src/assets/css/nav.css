@@ -1,0 +1,9 @@
+/* search section */
+.search-bar-section {
+    display: none;
+    transition: all 1s ease-out;
+}
+
+.search-bar-section.active {
+    display: block;
+}

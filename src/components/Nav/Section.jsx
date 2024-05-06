@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import Search from "../Search/Section";
+
+import "../../assets/css/nav.css";
 
 const Nav = () => {
     return (
@@ -14,17 +17,13 @@ const Nav = () => {
                             </NavLink>
                         </div>
                         {/* nav links and search bar */}
-                        <div className="col-10 text-end">
-                            <div className="d-flex justify-content-start">
-                                <div className="search-bar-section"></div>
-                                {/* search bar */}
-                                <div>
-                                    {/* icon */}
-                                    <button className="btn btn-transparent text-white"><i className="bi bi-search"></i></button>
-                                </div>
+                        <div className="col-10">
+                            <div className="float-end">
+                                <Search />
+
+                                {/* nav links */}
+                                <div></div>
                             </div>
-                            {/* nav links */}
-                            <div></div>
                         </div>
                     </div>
                 </div>
