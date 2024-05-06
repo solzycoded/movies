@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Define routes
 router.post('/', LanguageController.createLanguage);
+router.get('/', LanguageController.listLanguages);
 
 // export routes
 let languageRoutes = {

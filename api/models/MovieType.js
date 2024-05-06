@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import Model from "./model.js";
 
 const fields = {
-    movie_id: {
+    movie: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Movie',
         required: true,
     },
-    type_id: {
+    type: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Type',
         required: true,

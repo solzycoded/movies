@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Define routes
 router.post('/', TypeController.createType);
+router.get('/', TypeController.listOfTypes);
 
 // export routes
 let typeRoutes = {

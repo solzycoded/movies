@@ -4,15 +4,28 @@ import data from '../util/data.js';
 const createActor = async (req, res) => {
     const { name } = req.body;
 
+    if(!name){
+        return res.status(500).json({ success: false, message: "Name is missing!" });
+    }
+
     const actor = new Actor({ name });
 
     try {
         const newActor = await actor.save();
-        res.status(201).json(newActor);
+        res.status(201).json({ success: true, newActor });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error });
     }
 };
+
+const listOfActors = async (req, res) => {
+    try {
+        const actors = await Actor.find();
+        res.status(201).json({ success: true, data: actors});
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+}
 
 /* create default list of actors */
 const createDefaultActors = async () => {
@@ -29,5 +42,6 @@ createDefaultActors();
 
 // export CONTROLLER FUNCTIONS
 export default {
-    createActor
+    createActor,
+    listOfActors,
 }

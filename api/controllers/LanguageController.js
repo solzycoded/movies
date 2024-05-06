@@ -14,6 +14,16 @@ const createLanguage = async (req, res) => {
     }
 };
 
+
+const listLanguages = async (req, res) => {
+    try {
+        const languages = await Language.find();
+        res.status(201).json({ success: true, data: languages });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 /* create default list of languages */
 const createDefaultLanguages = async () => {
     Language.insertMany(data.languages)
@@ -29,5 +39,6 @@ createDefaultLanguages();
 
 // export CONTROLLER FUNCTIONS
 export default {
-    createLanguage
+    createLanguage,
+    listLanguages,
 }

@@ -15,6 +15,14 @@ const fields = {
     },
 };
 
-const Type = Model.schemaModel("Type", fields);
+let schema = Model.createSchema(fields);
+
+schema.virtual('movies', {
+    ref: 'MovieType',
+    localField: '_id',
+    foreignField: 'type'
+});
+
+const Type = Model.schemaModel("Type", fields, schema);
 
 export default Type;

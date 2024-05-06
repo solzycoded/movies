@@ -1,4 +1,5 @@
 import Model from "./model.js";
+import { Schema } from "mongoose";
 
 const fields = {
     name: { 
@@ -12,7 +13,7 @@ const fields = {
             },
             // message: 'Name already exists'
         }
-    },
+    }
 };
 
 const Language = Model.schemaModel("Language", fields);

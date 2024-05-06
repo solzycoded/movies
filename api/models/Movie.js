@@ -1,5 +1,5 @@
 import { Decimal128 } from "mongodb";
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 import Model from "./model.js";
 
 const fields = {
@@ -15,6 +15,10 @@ const fields = {
             message: 'Name already exists'
         }
     },
+    about: {
+        type: String, 
+        required: false,
+    },
     rating: {
         type: Decimal128, 
         required: true, 
@@ -24,29 +28,46 @@ const fields = {
         type: Number, 
         required: true
     },
-    language_id:  {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Language',
-        required: true,
+    language:  {
+        type: Schema.Types.ObjectId, 
+        ref: 'Language'
     },
-    trailer:  {
+    trailer: {
         type: String,
         required: true,
     },
-    poster:  {
+    poster: {
         type: String,
         required: false,
     },
-    release_year:  {
+    release_year: {
         type: Number,
         required: false,
     },
-    created_at:  {
+    created_at: {
         type: Date,
         default: Date.now
     },
 };
 
-const Movie = Model.schemaModel("Movie", fields);
+
+let schema = Model.createSchema(fields);
+
+// CREATE VIRTUAL FIELDS
+const setVirtualField = (fieldName, ref, localField, foreignField) => {
+    schema.virtual(fieldName, {
+        ref,
+        localField,
+        foreignField
+    });
+}
+
+setVirtualField('genres', 'MovieGenre', '_id', 'movie');
+setVirtualField('actors', 'MovieActor', '_id', 'movie');
+setVirtualField('types', 'MovieType', '_id', 'movie');
+setVirtualField('links', 'MovieLink', '_id', 'movie');
+
+// create schema model
+const Movie = Model.schemaModel("Movie", fields, schema);
 
 export default Movie;

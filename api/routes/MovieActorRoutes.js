@@ -5,7 +5,6 @@ const router = express.Router();
 
 // Define routes
 router.get('/', MovieActorController.listMovieActor);
-router.post('/', MovieActorController.createMovieActor);
 
 // export routes
 let movieActorRoutes = {
