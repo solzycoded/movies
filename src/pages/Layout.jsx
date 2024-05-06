@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
-// import Nav from "../components/Nav/Section";
+import Nav from "../components/Nav/Section";
 
 function Layout(){
     return (
         <>
-            {/* <Nav /> */}
+            <Nav />
             <main id="main">
                 <Outlet />
             </main>

@@ -1,3 +1,11 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.app-bg-color {
+    background-color: orange;
+}
+
+.app-color {
+    color: orange;
+}
