@@ -6,6 +6,7 @@ import "../../assets/css/search.css"
 const Search = () => {
     const [showSearch, setShowSearch]               = useState("");
     const [showSearchResults, setShowSearchResults] = useState("");
+    const [searchQuery, setSearchQuery]             = useState("");
 
     const toggleSearch = () => {
         let searchValue = (showSearch=="active" ? "" : "active");
@@ -28,7 +29,16 @@ const Search = () => {
                 <div className="position-relative search-container">
                     <div className="input-group mb-1 search-bar">
                         <div className={ `search-bar-section ${showSearch}` }>
-                            <input className="form-control rounded-0" type="search" placeholder="What would you like to watch today?" aria-label="Search" id="search-for-item" onClick={ toggleSearchResultsDropdown } autoComplete="off" onKeyUp={ filterSearchResults } />
+                            <input className="form-control rounded-0"
+                                type="search" 
+                                placeholder="What would you like to watch today?" 
+                                aria-label="Search" 
+                                id="search-for-item" 
+                                onClick={ toggleSearchResultsDropdown } 
+                                autoComplete="off" 
+                                onKeyUp={ filterSearchResults }
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)} />
                         </div>
                         <div className="p-0">
                             {/* icon */}
