@@ -1,6 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
+import cors from "cors"
 
 import env from "./api/util/env.js";
 
@@ -14,18 +15,28 @@ import movieLinkRoutes from "./api/routes/MovieLinkRoutes.js";
 import movieTypeRoutes from "./api/routes/MovieTypeRoutes.js";
 import movieActorRoutes from "./api/routes/MovieActorRoutes.js";
 import movieGenreRoutes from "./api/routes/MovieGenreRoutes.js";
+import searchMovieRoutes from "./api/routes/SearchMovieRoutes.js";
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+// default insertion END (to be removed later)
+const corsOptions = {
+    origin: '*', 
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose.connect((env.database.connection_string + env.database.name))
     .then(() => {
         console.log('Connected to MongoDB');
+        const PORT = process.env.PORT || 3000;
         // Start the server
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     })
@@ -59,3 +70,6 @@ app.use('/movie-actors', movieActorRoutes.router);
 
 // movie genre routes
 app.use('/movie-genres', movieGenreRoutes.router);
+
+// search movie routes
+app.use('/search-movies', searchMovieRoutes.router);
