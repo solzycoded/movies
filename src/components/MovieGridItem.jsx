@@ -26,8 +26,8 @@ function MovieGridItem({ movie }) {
                     <h5 className="card-title text-capitalize">{movie.name}</h5>
                     <p className="card-text">
                         {
-                            movie.genres.map((genre, i) => {
-                                return <MovieGenreItem genre={genre.name} key={i} />;
+                            movie.genres.map((item, i) => {
+                                return <MovieGenreItem genre={item.genre.name} key={i} />;
                             })
                         }
                     </p>

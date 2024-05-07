@@ -9,3 +9,7 @@
 .app-color {
     color: orange;
 }
+
+#app-logo {
+    height: 50px !important;
+}
