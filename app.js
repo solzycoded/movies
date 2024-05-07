@@ -36,7 +36,8 @@ app.use(cors(corsOptions));
 mongoose.connect((env.database.connection_string + env.database.name))
     .then(() => {
         console.log('Connected to MongoDB');
-        const PORT = process.env.PORT || 3000;
+        const PORT = env.PORT || 3000;
+
         // Start the server
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
     })

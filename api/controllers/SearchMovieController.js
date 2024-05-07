@@ -5,7 +5,7 @@ const listMovie = async (req, res) => {
     const regexMatch = new RegExp(search, 'i');
 
     try {
-        const movies = await Movie.find({ name: regexMatch }, 'name poster rating')
+        const movies = await Movie.find({ name: regexMatch }, 'name poster rating -_id')
             .exec();
 
         const success = movies.length > 0;

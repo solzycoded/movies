@@ -20,8 +20,7 @@ const fields = {
         required: false,
     },
     rating: {
-        type: Decimal128, 
-        required: true, 
+        type: Number, 
         default: 1
     },
     runtime: {
