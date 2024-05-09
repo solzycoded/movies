@@ -18,30 +18,30 @@ const createCategory = async (req, res) => {
     }
 };
 
-const listOfCategorys = async (req, res) => {
+const listOfCategories = async (req, res) => {
     try {
-        const categorys = await Category.find();
-        res.status(201).json({ success: true, data: categorys});
+        const categories = await Category.find();
+        res.status(201).json({ success: true, data: categories});
     } catch (error) {
         res.status(400).json({ message: error });
     }
 }
 
-/* create default list of categorys */
-const createDefaultCategorys = async () => {
-    Category.insertMany(data.categorys)
+/* create default list of categories */
+const createDefaultCategories = async () => {
+    Category.insertMany(data.categories)
         .then((docs) => {
-            console.log('Multiple categorys inserted');
+            console.log('Multiple categories inserted');
         })
         .catch((err) => {
             // console.error('Error inserting records: ', err);
         });
 }
 
-createDefaultCategorys();
+createDefaultCategories();
 
 // export CONTROLLER FUNCTIONS
 export default {
     createCategory,
-    listOfCategorys,
+    listOfCategories,
 }

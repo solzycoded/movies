@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Define routes
 router.post('/', CategoryController.createCategory);
-router.get('/', CategoryController.listOfCategorys);
+router.get('/', CategoryController.listOfCategories);
 
 // export routes
 let categoryRoutes = {

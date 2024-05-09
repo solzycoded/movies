@@ -1,9 +1,9 @@
 import MovieCategory from '../models/MovieCategory.js';
 
-const createMovieCategory = async (movie, categorys) => {
+const createMovieCategory = async (movie, categories) => {
     try {
-        if(categorys.length > 0){
-            const data = createMovieCategoryData(movie, categorys);
+        if(categories.length > 0){
+            const data = createMovieCategoryData(movie, categories);
 
             MovieCategory.insertMany(data)
                 .then((docs) => {
@@ -18,14 +18,14 @@ const createMovieCategory = async (movie, categorys) => {
     }
 };
 
-const createMovieCategoryData = (movie, categorys) => {
-    let movieCategorys = [];
+const createMovieCategoryData = (movie, categories) => {
+    let movieCategories = [];
 
-    categorys.forEach((category) => {
-        movieCategorys.push({movie, category});
+    categories.forEach((category) => {
+        movieCategories.push({movie, category});
     });
 
-    return movieCategorys;
+    return movieCategories;
 }
 
 // export SERVICE FUNCTIONS

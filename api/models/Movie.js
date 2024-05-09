@@ -63,7 +63,7 @@ const setVirtualField = (fieldName, ref, localField, foreignField) => {
 
 setVirtualField('genres', 'MovieGenre', '_id', 'movie');
 setVirtualField('actors', 'MovieActor', '_id', 'movie');
-setVirtualField('categorys', 'MovieCategory', '_id', 'movie');
+setVirtualField('categories', 'MovieCategory', '_id', 'movie');
 setVirtualField('links', 'MovieLink', '_id', 'movie');
 
 // create schema model

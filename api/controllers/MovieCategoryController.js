@@ -13,8 +13,8 @@ const createMovieCategory = async (data, res) => {
 
 const listMovieCategory = async (req, res) => {
     try {
-        const movieCategorys = await MovieCategory.find();
-        res.status(201).json({ data: movieCategorys });
+        const movieCategories = await MovieCategory.find();
+        res.status(201).json({ data: movieCategories });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
