@@ -6,13 +6,13 @@ import cors from "cors"
 import env from "./api/util/env.js";
 
 // routes
-import typeRoutes from "./api/routes/TypeRoutes.js";
+import categoryRoutes from "./api/routes/CategoryRoutes.js";
 import genreRoutes from "./api/routes/GenreRoutes.js";
 import languageRoutes from "./api/routes/LanguageRoutes.js";
 import actorRoutes from "./api/routes/ActorRoutes.js";
 import movieRoutes from "./api/routes/MovieRoutes.js";
-import movieLinkRoutes from "./api/routes/MovieLinkRoutes.js";
-import movieTypeRoutes from "./api/routes/MovieTypeRoutes.js";
+import movieLinkRoutes from "./api/routes/MovieLinkRoutes.js";``
+import movieCategoryRoutes from "./api/routes/MovieCategoryRoutes.js";
 import movieActorRoutes from "./api/routes/MovieActorRoutes.js";
 import movieGenreRoutes from "./api/routes/MovieGenreRoutes.js";
 import searchMovieRoutes from "./api/routes/SearchMovieRoutes.js";
@@ -45,8 +45,8 @@ mongoose.connect((env.database.connection_string + env.database.name))
 
 
 /* ROUTES */
-// type routes
-app.use('/types', typeRoutes.router);
+// category routes
+app.use('/categorys', categoryRoutes.router);
 
 // genre routes
 app.use('/genres', genreRoutes.router);
@@ -63,8 +63,8 @@ app.use('/movies', movieRoutes.router);
 // movie link routes
 app.use('/movie-links', movieLinkRoutes.router);
 
-// movie type routes
-app.use('/movie-types', movieTypeRoutes.router);
+// movie category routes
+app.use('/movie-categorys', movieCategoryRoutes.router);
 
 // movie actor routes
 app.use('/movie-actors', movieActorRoutes.router);

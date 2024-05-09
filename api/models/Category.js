@@ -18,11 +18,11 @@ const fields = {
 let schema = Model.createSchema(fields);
 
 schema.virtual('movies', {
-    ref: 'MovieType',
+    ref: 'MovieCategory',
     localField: '_id',
-    foreignField: 'type'
+    foreignField: 'category'
 });
 
-const Type = Model.schemaModel("Type", fields, schema);
+const Category = Model.schemaModel("Category", fields, schema);
 
-export default Type;
+export default Category;

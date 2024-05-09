@@ -1,5 +1,5 @@
 const data = {
-    types: [
+    categorys: [
         {name: "tv-shows"},
         {name: "movies"},
         {name: "animes"},

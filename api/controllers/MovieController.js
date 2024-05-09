@@ -2,11 +2,11 @@ import Movie from '../models/Movie.js';
 
 import MovieActorService from '../services/MovieActorService.js';
 import MovieGenreService from '../services/MovieGenreService.js';
-import MovieTypeService from '../services/MovieTypeService.js';
+import MovieCategoryService from '../services/MovieCategoryService.js';
 import MovieLinkService from '../services/MovieLinkService.js';
 
 const createMovie = async (req, res) => {
-    const { name, about, rating, runtime, language, trailer, releaseYear, poster, actors, genres, types, links } = req.body;
+    const { name, about, rating, runtime, language, trailer, releaseYear, poster, actors, genres, categorys, links } = req.body;
 
     if(!name || !runtime || !language || !poster || (!links && links.length==0)){
         return res.status(500).json({ success: false, message: "Some fields are missing" });
@@ -19,7 +19,7 @@ const createMovie = async (req, res) => {
         let movieId = newMovie._id;
         MovieActorService.createMovieActor(movieId, actors); // store actors of movie
         MovieGenreService.createMovieGenre(movieId, genres); // store genres of movie
-        MovieTypeService.createMovieType(movieId, types); // store types of movie
+        MovieCategoryService.createMovieCategory(movieId, categorys); // store categorys of movie
         MovieLinkService.createMovieLink(movieId, links); // store download links of movie
 
         res.status(201).json({ success: true, data: newMovie });
@@ -33,7 +33,7 @@ const listMovie = async (req, res) => {
         const movies = await Movie.find()
             .populate(createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
             .populate(createPopulateVal("actors", 'actor -_id', "actor", "name -_id")) // actors
-            .populate(createPopulateVal("types", 'type -_id', "type", "name -_id")) // types
+            .populate(createPopulateVal("categorys", 'category -_id', "category", "name -_id")) // categorys
             .populate("links", "name") // links
             .populate('language', 'name -_id') // Populate the 'language' field in the Movie document
             .exec();

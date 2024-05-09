@@ -9,11 +9,11 @@ const fields = {
     },
     type: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Type',
+        ref: 'Category',
         required: true,
     },
 };
 
-const MovieType = Model.schemaModel("MovieType", fields);
+const MovieCategory = Model.schemaModel("MovieCategory", fields);
 
-export default MovieType;
+export default MovieCategory;
