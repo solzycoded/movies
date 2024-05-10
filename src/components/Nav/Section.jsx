@@ -19,11 +19,15 @@ const Nav = () => {
                         </div>
                         {/* nav links and search bar */}
                         <div className="col-6 col-sm-8 col-md-10">
-                            <div className="float-end">
+                            <div className="float-end d-flex justify-content-end">
                                 <Search />
 
                                 {/* nav links */}
-                                <div></div>
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-1"><NavLink to="/categories" className="text-white text-decoration-none">categories</NavLink></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

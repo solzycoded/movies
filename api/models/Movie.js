@@ -1,4 +1,3 @@
-import { Decimal128 } from "mongodb";
 import { Schema } from "mongoose";
 import Model from "./model.js";
 

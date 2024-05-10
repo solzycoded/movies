@@ -5,10 +5,12 @@ import MovieGenreService from '../services/MovieGenreService.js';
 import MovieCategoryService from '../services/MovieCategoryService.js';
 import MovieLinkService from '../services/MovieLinkService.js';
 
+import App from '../util/app.js';
+
 const createMovie = async (req, res) => {
     const { name, about, rating, runtime, language, trailer, releaseYear, poster, actors, genres, categories, links } = req.body;
 
-    if(!name || !runtime || !language || !poster || (!links && links.length==0)){
+    if(!name || !runtime || !language || !poster || (!links && links.length==0)) {
         return res.status(500).json({ success: false, message: "Some fields are missing" });
     }
 
@@ -31,9 +33,9 @@ const createMovie = async (req, res) => {
 const listMovie = async (req, res) => {
     try {
         const movies = await Movie.find()
-            .populate(createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
-            .populate(createPopulateVal("actors", 'actor -_id', "actor", "name -_id")) // actors
-            .populate(createPopulateVal("categories", 'category -_id', "category", "name -_id")) // categories
+            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
+            .populate(App.createPopulateVal("actors", 'actor -_id', "actor", "name -_id")) // actors
+            .populate(App.createPopulateVal("categories", 'category -_id', "category", "name -_id")) // categories
             .populate("links", "name") // links
             .populate('language', 'name -_id') // Populate the 'language' field in the Movie document
             .exec();
@@ -45,17 +47,6 @@ const listMovie = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
-
-const createPopulateVal = (collection, collectionFields, target, targetFields) => {
-    return {
-        path: collection,
-        populate: { 
-            path: target,
-            select: targetFields
-        },
-        select: collectionFields
-    }
-}
 
 // export CONTROLLER FUNCTIONS
 export default {

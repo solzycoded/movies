@@ -20,7 +20,15 @@ const createCategory = async (req, res) => {
 
 const listOfCategories = async (req, res) => {
     try {
-        const categories = await Category.find();
+        const categories = await Category.find()
+            .populate({
+                path: "movies",
+                populate: {
+                    path: "movie",
+                    select: "name poster rating"
+                }
+            })
+            .exec();
         res.status(201).json({ success: true, data: categories});
     } catch (error) {
         res.status(400).json({ message: error });

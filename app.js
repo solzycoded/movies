@@ -46,7 +46,7 @@ mongoose.connect((env.database.connection_string + env.database.name))
 
 /* ROUTES */
 // category routes
-app.use('/categorys', categoryRoutes.router);
+app.use('/categories', categoryRoutes.router);
 
 // genre routes
 app.use('/genres', genreRoutes.router);
@@ -64,7 +64,7 @@ app.use('/movies', movieRoutes.router);
 app.use('/movie-links', movieLinkRoutes.router);
 
 // movie category routes
-app.use('/movie-categorys', movieCategoryRoutes.router);
+app.use('/movie-categories', movieCategoryRoutes.router);
 
 // movie actor routes
 app.use('/movie-actors', movieActorRoutes.router);

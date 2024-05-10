@@ -17,7 +17,9 @@ function MovieGridItem({ movie }) {
         // e.preventDefault();
         // navigate(`/movie/${movie.id}`);
     };
-
+    
+    const genres = movie.genres==null ? [] : movie.genres;
+    
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer mb-4" onClick={openMovieDetails} id={'movie-' + movie.id}>
             <div className="card position-relative shadow-sm bg-body rounded border-0">
@@ -26,7 +28,7 @@ function MovieGridItem({ movie }) {
                     <h5 className="card-title text-capitalize">{movie.name}</h5>
                     <p className="card-text">
                         {
-                            movie.genres.map((item, i) => {
+                            genres.map((item, i) => {
                                 return <MovieGenreItem genre={item.genre.name} key={i} />;
                             })
                         }
