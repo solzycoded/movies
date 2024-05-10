@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Define routes
 router.get('/', MovieController.listMovie);
+router.get('/by-category/:name', MovieController.listMovieByCategory);
 router.post('/', MovieController.createMovie);
 
 // export routes

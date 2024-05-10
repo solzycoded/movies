@@ -48,8 +48,55 @@ const listMovie = async (req, res) => {
     }
 };
 
+const listMovieByCategory = async (req, res) => {
+    const { name } = req.params;
+
+    if(!name){
+        return res.status(500).json({ success: false, message: "Name is missing!" });
+    }
+
+    try {
+        const movies = await Movie.find()
+            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
+            .populate({
+                path: "categories",
+                populate: {
+                    path: "category",
+                }
+            }) // categories
+
+        // Filter the populated documents based on a condition
+        const filteredMovies = filterMovies(movies, name);
+
+        const success = movies.length > 0;
+
+        res.status(201).json({ success: success, data: filteredMovies });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const filterMovies = (movies, name) => {
+    const filteredMovies = movies.filter((doc) => {
+        let isAMatch = false;
+
+        doc.categories.forEach((el) => {
+            if(el.category.name===name){
+                isAMatch = true;
+                return;
+            }
+        });
+
+        return isAMatch;
+    });
+
+    return filteredMovies;
+}
+
+
 // export CONTROLLER FUNCTIONS
 export default {
     createMovie,
-    listMovie
+    listMovie,
+    listMovieByCategory
 }

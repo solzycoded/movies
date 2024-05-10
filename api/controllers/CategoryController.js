@@ -35,6 +35,30 @@ const listOfCategories = async (req, res) => {
     }
 }
 
+const getCategory = async (req, res) => {
+    const { name } = req.params;
+
+    if(!name){
+        return res.status(500).json({ success: false, message: "Name is missing!" });
+    }
+
+    try {
+        const category = await Category.findOne({ name: name })
+            .populate({
+                path: "movies",
+                populate: {
+                    path: "movie",
+                    select: "name poster rating",
+                    sort: "name"
+                }
+            })
+            .exec();
+        res.status(201).json({ success: true, data: category});
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+}
+
 /* create default list of categories */
 const createDefaultCategories = async () => {
     Category.insertMany(data.categories)
@@ -52,4 +76,5 @@ createDefaultCategories();
 export default {
     createCategory,
     listOfCategories,
+    getCategory
 }
