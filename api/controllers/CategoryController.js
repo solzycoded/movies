@@ -26,7 +26,8 @@ const listOfCategories = async (req, res) => {
                 populate: {
                     path: "movie",
                     select: "name poster rating"
-                }
+                },
+                limit: 4
             })
             .exec();
         res.status(201).json({ success: true, data: categories});
