@@ -8,6 +8,7 @@ import Categories from "./pages/Categories";
 import Category from "./pages/Category";
 
 import Genres from "./pages/Genres";
+import Genre from "./pages/Genre";
 
 import "./assets/css/app.css"
 
@@ -23,7 +24,7 @@ function App(){
 
           {/* genres */}
           <Route path="genres" element={<Genres />} />
-          {/* <Route path="genres/:category" element={<Genre />} /> */}
+          <Route path="genres/:genre" element={<Genre />} />
 
           <Route path="*" element={<NoPage />} />
         </Route>
