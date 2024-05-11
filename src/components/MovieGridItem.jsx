@@ -25,7 +25,7 @@ function MovieGridItem({ movie }) {
             <div className="card position-relative shadow-sm bg-body rounded border-0">
                 <img src={movie.poster} className="card-img-top movie-grid-item-poster" alt="movie poster" />
                 <div className="card-body">
-                    <h5 className="card-title text-capitalize">{movie.name}</h5>
+                    <h5 className="card-title text-capitalize fs-6">{movie.name}</h5>
                     <p className="card-text">
                         {
                             genres.map((item, i) => {
