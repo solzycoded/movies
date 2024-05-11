@@ -58,12 +58,7 @@ const listMovieByCategory = async (req, res) => {
     try {
         const movies = await Movie.find()
             .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
-            .populate({
-                path: "categories",
-                populate: {
-                    path: "category",
-                }
-            }) // categories
+            .populate(App.createPopulateVal("categories", 'category -_id', "category", "name -_id")) // categories
 
         // Filter the populated documents based on a condition
         const filteredMovies = filterMovies(movies, name);
@@ -76,16 +71,47 @@ const listMovieByCategory = async (req, res) => {
     }
 };
 
-const filterMovies = (movies, name) => {
+const listMovieByGenre = async (req, res) => {
+    const { name } = req.params;
+
+    if(!name){
+        return res.status(500).json({ success: false, message: "Name is missing!" });
+    }
+
+    try {
+        const movies = await Movie.find()
+            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
+
+        // Filter the populated documents based on a condition
+        const filteredMovies = filterMovies(movies, name, "genre");
+
+        const success        = movies.length > 0;
+        res.status(201).json({ success: success, data: filteredMovies });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const filterMovies = (movies, name, type = "category") => {
     const filteredMovies = movies.filter((doc) => {
         let isAMatch = false;
 
-        doc.categories.forEach((el) => {
-            if(el.category.name===name){
-                isAMatch = true;
-                return;
-            }
-        });
+        if(type=="category"){
+            doc.categories.forEach((el) => {
+                if(el.category.name===name){
+                    isAMatch = true;
+                    return;
+                }
+            });
+        }
+        else {
+            doc.genres.forEach((el) => {
+                if(el.genre.name===name){
+                    isAMatch = true;
+                    return;
+                }
+            });
+        }
 
         return isAMatch;
     });
@@ -98,5 +124,6 @@ const filterMovies = (movies, name) => {
 export default {
     createMovie,
     listMovie,
-    listMovieByCategory
+    listMovieByCategory,
+    listMovieByGenre,
 }
