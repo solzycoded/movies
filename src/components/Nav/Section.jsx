@@ -26,6 +26,7 @@ const Nav = () => {
                                 <div className="container-fluid">
                                     <div className="row">
                                         <div className="col-1"><NavLink to="/categories" className="text-white text-decoration-none">categories</NavLink></div>
+                                        <div className="col-1"><NavLink to="/genres" className="text-white text-decoration-none">genres</NavLink></div>
                                     </div>
                                 </div>
                             </div>
