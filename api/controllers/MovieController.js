@@ -119,7 +119,6 @@ const filterMovies = (movies, name, type = "category") => {
     return filteredMovies;
 }
 
-
 // export CONTROLLER FUNCTIONS
 export default {
     createMovie,

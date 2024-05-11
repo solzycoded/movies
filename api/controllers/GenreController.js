@@ -20,8 +20,16 @@ const createGenre = async (req, res) => {
 
 const listOfGenres = async (req, res) => {
     try {
-        const genres = await Genre.find();
-        res.status(201).json({ success: true, data: genres});
+        const genres = await Genre.find()
+            .populate({
+                path: "movies",
+                populate: {
+                    path: "movie",
+                    select: "name poster rating"
+                }
+            })
+            .exec();
+        res.status(201).json({ success: true, data: genres });
     } catch (error) {
         res.status(400).json({ message: error });
     }
