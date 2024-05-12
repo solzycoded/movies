@@ -10,6 +10,8 @@ import Category from "./pages/Category";
 import Genres from "./pages/Genres";
 import Genre from "./pages/Genre";
 
+import MovieInfo from "./pages/MovieInfo";
+
 import "./assets/css/app.css"
 
 function App(){
@@ -18,6 +20,7 @@ function App(){
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+
           {/* categories */}
           <Route path="categories" element={<Categories />} />
           <Route path="categories/:category" element={<Category />} />
@@ -26,6 +29,10 @@ function App(){
           <Route path="genres" element={<Genres />} />
           <Route path="genres/:genre" element={<Genre />} />
 
+          {/* movie details */}
+          <Route path="/:movie_name" element={<MovieInfo />} />
+
+          {/* no page */}
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

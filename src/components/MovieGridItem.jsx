@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
+// import { useState, useEffect } from "react";
 
 import MovieRating from './MovieRating';
 import MovieGenreItem from "./MovieGenreItem";
@@ -11,15 +12,22 @@ function MovieGridItem({ movie }) {
         return;
     }
 
-    const navigate = useNavigate();
+    // const [currentUrl, setCurrentUrl] = useState("");
 
+    // useEffect(() => {
+    //     // Update the state with the current URL when the component mounts
+    //     setCurrentUrl(window.location.href);
+    // }, []); // Empty dependency array to run this effect only once
+
+    const navigate = useNavigate();
     const openMovieDetails = (e) => {
-        // e.preventDefault();
-        // navigate(`/movie/${movie.id}`);
+        e.preventDefault();
+
+        navigate(`/${movie.name}`);
     };
-    
+
     const genres = movie.genres==null ? [] : movie.genres;
-    
+
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer mb-4" onClick={openMovieDetails} id={'movie-' + movie.id}>
             <div className="card position-relative shadow-sm bg-body rounded border-0">
