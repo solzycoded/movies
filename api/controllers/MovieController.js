@@ -119,10 +119,34 @@ const filterMovies = (movies, name, type = "category") => {
     return filteredMovies;
 }
 
+const getMovie = async (req, res) => {
+    const { name } = req.params;
+
+    if(!name){
+        return res.status(500).json({ success: false, message: "Name is missing!" });
+    }
+
+    try {
+        const movie = await Movie.findOne({ name })
+            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
+            .populate(App.createPopulateVal("actors", 'actor -_id', "actor", "name -_id")) // actors
+            .populate(App.createPopulateVal("categories", 'category -_id', "category", "name -_id")) // categories
+            .populate("links", "link -_id") // links
+            .populate('language', 'name -_id') // Populate the 'language' field in the Movie document
+            .exec()
+
+        const success = movie!=null;
+        res.status(201).json({ success: success, data: movie });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 // export CONTROLLER FUNCTIONS
 export default {
     createMovie,
     listMovie,
     listMovieByCategory,
     listMovieByGenre,
+    getMovie
 }
