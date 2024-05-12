@@ -1,3 +1,60 @@
+
+// convert minutes to hours and minutes format
+const convertMinsToHours = mins => {
+    let h = Math.floor(mins / 60);
+    let m = Math.round(mins % 60);
+
+    return `${h} hr(s), ${m} min(s)`;
+};
+
+// created a new date in the format (dayofweek, day month year)
+// const formatDate = oldDate => {
+//     const date = new Date(oldDate);
+
+//     let dayOfWeek = getDayOfWeek(date.getDay()).slice(0, 3);
+//     let monthOfYear = getMonthOfYear(date.getMonth()).slice(0, 3);
+
+//     let newDate = `${dayOfWeek}, ${date.getDate()} ${monthOfYear} ${date.getFullYear()}`;
+
+//     return newDate;
+// };
+
+// const getDayOfWeek = day => {
+//     let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+//     return daysOfWeek[day];
+// };
+
+// const getMonthOfYear = month => {
+//     let monthsOfYear = [
+//         'January',
+//         'February',
+//         'March',
+//         'April',
+//         'May',
+//         'June',
+//         'July',
+//         'August',
+//         'September',
+//         'October',
+//         'November',
+//         'December'
+//     ];
+
+//     return monthsOfYear[month];
+// };
+
+const displayList = (list, separator) => {
+    return list.map((item, i) => {
+        return item.actor.name + ((i < list.length - 1) ? separator : "");
+    });
+};
+
+// Format a date string (Tue, 19 Mar 2024 16:27:17 GMT) to a human-readable format (12:32 PM, 19th March 2024)
+// const formatDateTime = date => {
+//     return format(new Date(date), 'p, do MMMM yyyy');
+// };
+
 const data = {
     movies: [
         {
@@ -67,6 +124,10 @@ const data = {
     ]
 }
 
-export default {
-    data
+const App = {
+    data,
+    convertMinsToHours,
+    displayList
 }
+
+export default App;
