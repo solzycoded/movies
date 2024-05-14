@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// user pages
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
@@ -13,6 +14,10 @@ import Genre from "./pages/Genre";
 import MovieInfo from "./pages/MovieInfo";
 
 import "./assets/css/app.css"
+
+// admin pages
+import DashboardLayout from "./pages/Admin/Layout";
+import Dashboard from "./pages/Admin/Dashboard";
 
 function App(){
   return (
@@ -31,6 +36,13 @@ function App(){
 
           {/* movie details */}
           <Route path="/:movie_name" element={<MovieInfo />} />
+
+          {/* no page */}
+          <Route path="*" element={<NoPage />} />
+        </Route>
+
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />
