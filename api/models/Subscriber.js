@@ -8,7 +8,7 @@ const fields = {
         validate: {
             validator: function(value) {
                 return this.constructor
-                    .findOne({ name: value })
+                    .findOne({ email: value })
                     .then(existingUser => !existingUser);
             },
             message: 'Email already exists'
@@ -24,6 +24,6 @@ const fields = {
     }
 };
 
-const Subscriber = Model.schemaModel("Genre", fields);
+const Subscriber = Model.schemaModel("Subscriber", fields);
 
 export default Subscriber;

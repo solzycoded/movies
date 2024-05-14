@@ -16,6 +16,7 @@ import movieCategoryRoutes from "./api/routes/MovieCategoryRoutes.js";
 import movieActorRoutes from "./api/routes/MovieActorRoutes.js";
 import movieGenreRoutes from "./api/routes/MovieGenreRoutes.js";
 import searchMovieRoutes from "./api/routes/SearchMovieRoutes.js";
+import subscriberRoutes from "./api/routes/SubscriberRoutes.js";
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
@@ -74,3 +75,6 @@ app.use('/movie-genres', movieGenreRoutes.router);
 
 // search movie routes
 app.use('/search-movies', searchMovieRoutes.router);
+
+// subscriber routes
+app.use('/subscribers', subscriberRoutes.router);
