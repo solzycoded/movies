@@ -15,31 +15,67 @@ const CreateMovie = () => {
     const [trailer, setMovieTrailer]         = useState("");
     const [releaseYear, setMovieReleaseYear] = useState("");
     const [poster, setMoviePoster]           = useState("");
+    const [posterFile, setMoviePosterFile]   = useState({});
     const [about, setAboutMovie]             = useState("");
-    const [movieLink, setMovieLink]           = useState("");
-    const [error, setError]           = useState("");
+    const [movieLink, setMovieLink]          = useState("");
 
+    const [error, setError]                  = useState("");
+
+    const configureMoviePoster = (e) => {
+        setMoviePoster(e.target.value);
+        setMoviePosterFile(e.target.files[0]);
+    }
 
     const submitMovie = (e) => {
         e.preventDefault();
-        
+
         const language = document.querySelector("#language").value;
-        let data = { name, rating, runtime, trailer, releaseYear, poster, about, links: [movieLink], language };
+        const categories = getSelectOptionValues("#category");
+        const actors = getSelectOptionValues("#actor");
+        const genres = getSelectOptionValues("#genre");
 
-        console.log(data);
-        // const success = (data) => {
-        //     setError("");
-        // }
+        let data = createFormData(language, categories, actors, genres);
 
-        // const failure = (data) => {
-        //     setError("Movie name already exists!");
-        // }
+        const success = (data) => {
+            setError("");
+            alert("success");
+        }
 
-        // (new FetchRequest("POST", "movies", data)).send(success, failure);
+        const failure = (data) => {
+            setError("Movie name already exists!");
+        }
+
+        (new FetchRequest("POST", "movies", data, true)).send(success, failure);
     }
 
-    const getSelectValues = () => {
+    const getSelectOptionValues = (selector) => {
+        const options    = document.querySelector(selector).selectedOptions;
+        let optionValues = [];
 
+        for (let index = 0; index < options.length; index++) {
+            optionValues.push(options[index].value);
+        }
+
+        return optionValues;
+    }
+
+    const createFormData = (language, categories, actors, genres) => {
+        const formData = new FormData();
+        formData.append('poster', posterFile);
+        formData.append('name', name);
+        formData.append('rating', rating);
+        formData.append('runtime', runtime);
+        formData.append('trailer', trailer);
+        formData.append('releaseYear', releaseYear);
+        formData.append('about', about);
+        formData.append('language', language);
+
+        formData.append('links', [movieLink]);
+        formData.append('categories', categories);
+        formData.append('actors', actors);
+        formData.append('genres', genres);
+
+        return formData;
     }
 
     return (
@@ -53,7 +89,7 @@ const CreateMovie = () => {
                     <div className="mb-2 text-danger fw-bold text-small">{error}</div>
                     {/* name */}
                     <div className="form-floating mb-3">
-                        <input type="text" className="form-control" id="movie-name" placeholder="what's the movie's name?" value={name} onChange={(e) => setMovieName(e.target.value)} required />
+                        <input type="text" className="form-control" id="movie-name" placeholder="what's the movie's name?" value={name} onChange={(e) => setMovieName(e.target.value)}  />
                         <label htmlFor="movie-name">Movie Name</label>
                     </div>
                     {/* rating */}
@@ -63,7 +99,7 @@ const CreateMovie = () => {
                     </div>
                     {/* runtime */}
                     <div className="form-floating mb-3">
-                        <input type="number" className="form-control" id="movie-runtime" placeholder="what's the movie's runtime?" value={runtime} onChange={(e) => setMovieRuntime(e.target.value)} required />
+                        <input type="number" className="form-control" id="movie-runtime" placeholder="what's the movie's runtime?" value={runtime} onChange={(e) => setMovieRuntime(e.target.value)}  />
                         <label htmlFor="movie-runtime">Movie Runtime</label>
                     </div>
                     {/* select categories */}
@@ -74,12 +110,12 @@ const CreateMovie = () => {
                     <SelectLanguage />
                     {/* trailer (you should be able to provide more than one trailers and link the trailer to a season or movie) */}
                     <div className="form-floating mb-3">
-                        <input type="text" className="form-control" id="movie-trailer" placeholder="what's the movie's trailer?" value={trailer} onChange={(e) => setMovieTrailer(e.target.value)} required />
+                        <input type="text" className="form-control" id="movie-trailer" placeholder="what's the movie's trailer?" value={trailer} onChange={(e) => setMovieTrailer(e.target.value)}  />
                         <label htmlFor="movie-trailer">Movie Trailer</label>
                     </div>
                     {/* select release year */}
                     <div className="form-floating mb-3">
-                        <select className="form-select" id="release-year" required value={releaseYear} onChange={(e) => setMovieReleaseYear(e.target.value)}>
+                        <select className="form-select" id="release-year"  value={releaseYear} onChange={(e) => setMovieReleaseYear(e.target.value)}>
                             <option disabled value="">Select year of release</option>
                             {
                                 App.generateArrayOfNumbers(1920, 2024).map((value, i) => {
@@ -98,12 +134,12 @@ const CreateMovie = () => {
                     </div>
                     {/* upload movie poster */}
                     <div className="input-group mb-3">
-                        <input type="file" className="form-control" id="movie-poster" accept="image/*" value={poster} onChange={(e) => setMoviePoster(e.target.value)} />
+                        <input type="file" className="form-control" id="movie-poster" accept="image/*" value={poster} onChange={configureMoviePoster} />
                         <label className="input-group-text" htmlFor="movie-poster">Upload</label>
                     </div>
                     {/* to be removed later (provide download links) */}
                     <div className="form-floating mb-3">
-                        <input type="url" className="form-control" id="movie-link" placeholder="what's the movie's link?" value={movieLink} onChange={(e) => setMovieLink(e.target.value)} required />
+                        <input type="url" className="form-control" id="movie-link" placeholder="what's the movie's link?" value={movieLink} onChange={(e) => setMovieLink(e.target.value)}  />
                         <label htmlFor="movie-link">Movie Link</label>
                     </div>
                     {/* submit button */}

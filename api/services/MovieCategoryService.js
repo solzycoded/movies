@@ -3,7 +3,7 @@ import MovieCategory from '../models/MovieCategory.js';
 const createMovieCategory = async (movie, categories) => {
     try {
         if(categories.length > 0){
-            const data = createMovieCategoryData(movie, categories);
+            const data = createMovieCategoryData(movie, categories.split(","));
 
             MovieCategory.insertMany(data)
                 .then((docs) => {

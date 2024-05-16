@@ -3,7 +3,7 @@ import MovieLink from '../models/MovieLink.js';
 const createMovieLink = async (movie, links) => {
     try {
         if(links.length > 0){
-            const data = createMovieLinkData(movie, links);
+            const data = createMovieLinkData(movie, links.split(","));
 
             MovieLink.insertMany(data)
                 .then((docs) => {

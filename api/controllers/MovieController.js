@@ -4,17 +4,21 @@ import MovieActorService from '../services/MovieActorService.js';
 import MovieGenreService from '../services/MovieGenreService.js';
 import MovieCategoryService from '../services/MovieCategoryService.js';
 import MovieLinkService from '../services/MovieLinkService.js';
+import MovieService from '../services/MovieService.js';
 
 import App from '../util/app.js'; 
 
-const createMovie = async (req, res) => {
-    const { name, about, rating, runtime, language, trailer, releaseYear, poster, actors, genres, categories, links } = req.body;
 
-    if(!name || !runtime || !language || !poster || (!links && links.length==0)) {
+const createMovie = async (req, res) => {
+    const { name, about, rating, runtime, language, trailer, releaseYear, actors, genres, categories, links } = req.body;
+
+    if(!name || !runtime || !language || (!links && links.length==0)) {
         return res.status(500).json({ success: false, message: "Some fields are missing" });
     }
 
     try {
+        const poster = await MovieService.uploadPosterToTheCloud(req);
+
         const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster });
         const newMovie = await movie.save(); // create movie
 
@@ -26,7 +30,7 @@ const createMovie = async (req, res) => {
 
         res.status(201).json({ success: true, data: newMovie });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(202).json({ success: false, message: error.message });
     }
 };
 

@@ -3,7 +3,7 @@ import MovieGenre from '../models/MovieGenre.js';
 const createMovieGenre = async (movie, genres) => {
     try {
         if(genres.length > 0){
-            const data = createMovieGenreData(movie, genres);
+            const data = createMovieGenreData(movie, genres.split(","));
 
             MovieGenre.insertMany(data)
                 .then((docs) => {

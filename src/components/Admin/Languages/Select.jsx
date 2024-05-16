@@ -25,7 +25,7 @@ function SelectLanguage(){
     return (
         <>
         <div className="form-floating mb-3">
-            <select className="form-select" id="language" required value={movieLanguage} onChange={(e) => setMovieLanguage(e.target.value)}>
+            <select className="form-select" id="language"  value={movieLanguage} onChange={(e) => setMovieLanguage(e.target.value)}>
                 <option disabled value="">Select a language</option>
                 {
                     languages.map((value, i) => {
@@ -33,7 +33,7 @@ function SelectLanguage(){
                     })
                 }
             </select>
-            <label htmlFor="language">Year of Release</label>
+            <label htmlFor="language">Select Language</label>
         </div>
         </>
     )

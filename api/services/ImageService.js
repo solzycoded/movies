@@ -1,14 +1,24 @@
-const cloudinary = require('cloudinary');
+import cloudinary from "cloudinary"
 
-cloudinary.v2.config({
+let cloud = cloudinary.v2;
+
+cloud.config({
   cloud_name: 'ellegacy',
   api_key: '834238324726431',
   api_secret: 'xp6dEiVwgavgBgL9-LINk1RYoi0',
   secure: true,
 });
 
-// By default, the API endpoints use the following format:
+async function upload(file) {
+  const res = await cloudinary.uploader.upload(file, {
+    resource_type: "auto",
+  });
 
-// https://api.cloudinary.com/v1_1/:cloud_name/:action
+  return res;
+}
 
-// e.g. POST https://api.cloudinary.com/v1_1/demo/image/upload
+const Image = {
+  upload
+}
+
+export default Image;

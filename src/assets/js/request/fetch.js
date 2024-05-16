@@ -1,10 +1,11 @@
 export default class FetchRequest {
-    constructor(method, url, data = {}){
+    constructor(method, url, data = {}, isFormData = false){
         this.baseUrl = "http://localhost:3000/";
 
         this.method  = method;
         this.url     = this.baseUrl + url;
         this.data    = data;
+        this.isFormData = isFormData;
 
         this.options = this.makeOptions();
     }
@@ -13,13 +14,15 @@ export default class FetchRequest {
         const options = {
             method: this.method,
             url: this.url,
-            headers: {
-                'Content-Type': 'application/json',
-            }
         };
 
         if(this.method!="GET"){
-            options.body = JSON.stringify(this.data);
+            options.body = this.isFormData ? this.data : JSON.stringify(this.data);
+        }
+        if(!this.isFormData){
+            options.headers = {
+                'Content-Type': 'application/json',
+            }
         }
 
         return options;

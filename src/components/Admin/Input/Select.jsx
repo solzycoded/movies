@@ -14,7 +14,7 @@ function Select({ id, title, options, selectedDefault }){
         <>
             <div className="form-group mb-3">
                 <label htmlFor={id}>{ title }</label>
-                <select className="form-select" id={id} multiple required value={selectValue} onChange={appendSelectValue}>
+                <select className="form-select" id={id} multiple  value={selectValue} onChange={appendSelectValue}>
                     {
                         selectedDefault && (<option disabled value="">{ selectedDefault }</option>)
                     }
