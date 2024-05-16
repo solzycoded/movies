@@ -92,27 +92,14 @@ const CreateMovie = () => {
                         <input type="text" className="form-control" id="movie-name" placeholder="what's the movie's name?" value={name} onChange={(e) => setMovieName(e.target.value)}  />
                         <label htmlFor="movie-name">Movie Name</label>
                     </div>
-                    {/* rating */}
-                    <div className="mb-2">
-                        <label htmlFor="rating" className="form-label">Movie Rating (<b>{rating}</b>)</label>
-                        <input type="range" className="form-range" min="0" max="5" id="rating" step="0.1" value={rating} onChange={(e) => setMovieRating(e.target.value)} />
-                    </div>
-                    {/* runtime */}
-                    <div className="form-floating mb-3">
-                        <input type="number" className="form-control" id="movie-runtime" placeholder="what's the movie's runtime?" value={runtime} onChange={(e) => setMovieRuntime(e.target.value)}  />
-                        <label htmlFor="movie-runtime">Movie Runtime</label>
-                    </div>
+                    {/* select actors */}
+                    <SelectActor />
                     {/* select categories */}
                     <SelectCategory />
                     {/* select genres */}
                     <SelectGenre />
                     {/* select language */}
                     <SelectLanguage />
-                    {/* trailer (you should be able to provide more than one trailers and link the trailer to a season or movie) */}
-                    <div className="form-floating mb-3">
-                        <input type="text" className="form-control" id="movie-trailer" placeholder="what's the movie's trailer?" value={trailer} onChange={(e) => setMovieTrailer(e.target.value)}  />
-                        <label htmlFor="movie-trailer">Movie Trailer</label>
-                    </div>
                     {/* select release year */}
                     <div className="form-floating mb-3">
                         <select className="form-select" id="release-year"  value={releaseYear} onChange={(e) => setMovieReleaseYear(e.target.value)}>
@@ -125,8 +112,21 @@ const CreateMovie = () => {
                         </select>
                         <label htmlFor="release-year">Year of Release</label>
                     </div>
-                    {/* select actors */}
-                    <SelectActor />
+                    {/* trailer (you should be able to provide more than one trailers and link the trailer to a season or movie) */}
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="movie-trailer" placeholder="what's the movie's trailer?" value={trailer} onChange={(e) => setMovieTrailer(e.target.value)}  />
+                        <label htmlFor="movie-trailer">Movie Trailer</label>
+                    </div>
+                    {/* to be removed later (provide download links) */}
+                    <div className="form-floating mb-3">
+                        <input type="url" className="form-control" id="movie-link" placeholder="what's the movie's link?" value={movieLink} onChange={(e) => setMovieLink(e.target.value)}  />
+                        <label htmlFor="movie-link">Movie Link</label>
+                    </div>
+                    {/* runtime */}
+                    <div className="form-floating mb-3">
+                        <input type="number" className="form-control" id="movie-runtime" placeholder="what's the movie's runtime?" value={runtime} onChange={(e) => setMovieRuntime(e.target.value)}  />
+                        <label htmlFor="movie-runtime">Movie Runtime</label>
+                    </div>
                     {/* about */}
                     <div className="form-floating mb-3">
                         <textarea className="form-control" placeholder="What's the movie about?" id="about" style={{height: "100px"}} value={about} onChange={(e) => setAboutMovie(e.target.value)}></textarea>
@@ -137,11 +137,12 @@ const CreateMovie = () => {
                         <input type="file" className="form-control" id="movie-poster" accept="image/*" value={poster} onChange={configureMoviePoster} />
                         <label className="input-group-text" htmlFor="movie-poster">Upload</label>
                     </div>
-                    {/* to be removed later (provide download links) */}
-                    <div className="form-floating mb-3">
-                        <input type="url" className="form-control" id="movie-link" placeholder="what's the movie's link?" value={movieLink} onChange={(e) => setMovieLink(e.target.value)}  />
-                        <label htmlFor="movie-link">Movie Link</label>
+                    {/* rating */}
+                    <div className="mb-2">
+                        <label htmlFor="rating" className="form-label">Movie Rating (<b>{rating}</b>)</label>
+                        <input type="range" className="form-range" min="0" max="5" id="rating" step="0.1" value={rating} onChange={(e) => setMovieRating(e.target.value)} />
                     </div>
+
                     {/* submit button */}
                     <div className="float-end mt-4">
                         <button type="submit" className="btn btn-dark">Create</button>

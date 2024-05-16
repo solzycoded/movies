@@ -18,7 +18,8 @@ import "./assets/css/app.css"
 // admin pages
 import DashboardLayout from "./pages/Admin/Layout";
 import Dashboard from "./pages/Admin/Dashboard";
-import Movies from "./pages/Admin/Movies";
+import Movies from "./pages/Admin/Movies/List";
+import CreateAMovie from "./pages/Admin/Movies/Create";
 
 function App(){
   return (
@@ -44,7 +45,9 @@ function App(){
 
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
+
           <Route path="movies" element={<Movies />} />
+          <Route path="movies/create" element={<CreateAMovie />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />

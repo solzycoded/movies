@@ -1,11 +1,11 @@
-import CreateMovie from "../../components/Admin/Movies/Create";
+// import CreateMovie from "../../components/Admin/Movies/Create";
 
 function Movies(){
     return (
         <>
             <section className="container-fluid">
                 <div className="col-12 col-md-5">
-                    <CreateMovie />
+                    {/* <CreateMovie /> */}
                 </div>
                 <div className="col-12 col-md-7">
                     {/* list of movies */}

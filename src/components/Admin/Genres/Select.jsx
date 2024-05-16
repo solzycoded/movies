@@ -24,7 +24,7 @@ function SelectGenre(){
 
     return (
         <>
-            <Select id="genre" title="Select Genre" selectedDefault="Select a genre" options={genres} />
+            <Select id="genre" title="Select Genre(s)" selectedDefault="Select a genre" options={genres} />
         </>
     )
 }

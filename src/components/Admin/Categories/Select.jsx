@@ -24,7 +24,7 @@ function SelectCategory(){
 
     return (
         <>
-            <Select id="category" title="Select Category" selectedDefault="Select a category" options={categories} />
+            <Select id="category" title="Select Categories" selectedDefault="Select a category" options={categories} />
         </>
     )
 }

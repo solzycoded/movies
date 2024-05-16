@@ -24,7 +24,7 @@ function SelectActor(){
 
     return (
         <>
-            <Select id="actor" title="Select Actor" selectedDefault="Select a actor" options={actors} />
+            <Select id="actor" title="Select Actor(s)" selectedDefault="Select a actor" options={actors} />
         </>
     )
 }
