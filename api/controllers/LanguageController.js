@@ -18,7 +18,9 @@ const createLanguage = async (req, res) => {
 const listLanguages = async (req, res) => {
     try {
         const languages = await Language.find();
-        res.status(201).json({ success: true, data: languages });
+
+        const success   = languages > 0;
+        res.status(201).json({ success, data: languages });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

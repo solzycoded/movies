@@ -21,7 +21,9 @@ const createActor = async (req, res) => {
 const listOfActors = async (req, res) => {
     try {
         const actors = await Actor.find();
-        res.status(201).json({ success: true, data: actors});
+
+        const success = actors > 0;
+        res.status(201).json({ success, data: actors});
     } catch (error) {
         res.status(400).json({ message: error });
     }

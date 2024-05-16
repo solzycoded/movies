@@ -55,6 +55,16 @@ const displayList = (list, separator) => {
 //     return format(new Date(date), 'p, do MMMM yyyy');
 // };
 
+const generateArrayOfNumbers = (from, to) => {
+    let arr = [];
+
+    for (let index = from; index <= to; index++) {
+        arr.push(index);
+    }
+
+    return arr;
+}
+
 const data = {
     movies: [
         {
@@ -127,7 +137,8 @@ const data = {
 const App = {
     data,
     convertMinsToHours,
-    displayList
+    displayList,
+    generateArrayOfNumbers,
 }
 
 export default App;

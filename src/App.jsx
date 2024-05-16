@@ -18,6 +18,7 @@ import "./assets/css/app.css"
 // admin pages
 import DashboardLayout from "./pages/Admin/Layout";
 import Dashboard from "./pages/Admin/Dashboard";
+import Movies from "./pages/Admin/Movies";
 
 function App(){
   return (
@@ -43,6 +44,7 @@ function App(){
 
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="movies" element={<Movies />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />

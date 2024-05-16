@@ -11,7 +11,8 @@ const Nav = () => {
                 </NavLink>
                 <hr/>
                 <ul className="nav nav-pills flex-column mb-auto">
-                    <NavItem link="" title="Dasboard" icon="house-door-fill" />
+                    <NavItem link="" title="Dashboard" icon="house-door-fill" />
+                    <NavItem link="movies" title="Movies" icon="film" />
                 </ul>
             </div>
         </>

@@ -5,7 +5,7 @@ import MovieGenreService from '../services/MovieGenreService.js';
 import MovieCategoryService from '../services/MovieCategoryService.js';
 import MovieLinkService from '../services/MovieLinkService.js';
 
-import App from '../util/app.js';
+import App from '../util/app.js'; 
 
 const createMovie = async (req, res) => {
     const { name, about, rating, runtime, language, trailer, releaseYear, poster, actors, genres, categories, links } = req.body;

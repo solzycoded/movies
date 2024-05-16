@@ -29,6 +29,7 @@ const listOfCategories = async (req, res) => {
                 },
                 limit: 4
             })
+            .sort("name")
             .exec();
         res.status(201).json({ success: true, data: categories});
     } catch (error) {
