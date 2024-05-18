@@ -7,53 +7,11 @@ const convertMinsToHours = mins => {
     return `${h} hr(s), ${m} min(s)`;
 };
 
-// created a new date in the format (dayofweek, day month year)
-// const formatDate = oldDate => {
-//     const date = new Date(oldDate);
-
-//     let dayOfWeek = getDayOfWeek(date.getDay()).slice(0, 3);
-//     let monthOfYear = getMonthOfYear(date.getMonth()).slice(0, 3);
-
-//     let newDate = `${dayOfWeek}, ${date.getDate()} ${monthOfYear} ${date.getFullYear()}`;
-
-//     return newDate;
-// };
-
-// const getDayOfWeek = day => {
-//     let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-//     return daysOfWeek[day];
-// };
-
-// const getMonthOfYear = month => {
-//     let monthsOfYear = [
-//         'January',
-//         'February',
-//         'March',
-//         'April',
-//         'May',
-//         'June',
-//         'July',
-//         'August',
-//         'September',
-//         'October',
-//         'November',
-//         'December'
-//     ];
-
-//     return monthsOfYear[month];
-// };
-
 const displayList = (list, separator) => {
     return list.map((item, i) => {
         return item.actor.name + ((i < list.length - 1) ? separator : "");
     });
 };
-
-// Format a date string (Tue, 19 Mar 2024 16:27:17 GMT) to a human-readable format (12:32 PM, 19th March 2024)
-// const formatDateTime = date => {
-//     return format(new Date(date), 'p, do MMMM yyyy');
-// };
 
 const generateArrayOfNumbers = (from, to) => {
     let arr = [];
@@ -63,6 +21,36 @@ const generateArrayOfNumbers = (from, to) => {
     }
 
     return arr;
+}
+
+const getSelectOptionValues = (selector) => {
+    const options    = document.querySelector(selector).selectedOptions;
+    let optionValues = [];
+
+    for (let index = 0; index < options.length; index++) {
+        optionValues.push(options[index].value);
+    }
+
+    return optionValues;
+}
+
+const createFormData = (movie) => {
+    const formData = new FormData();
+    formData.append('poster', movie.posterFile);
+    formData.append('name', movie.name);
+    formData.append('rating', movie.rating);
+    formData.append('runtime', movie.runtime);
+    formData.append('trailer', movie.trailer);
+    formData.append('releaseYear', movie.releaseYear);
+    formData.append('about', movie.about);
+    formData.append('language', movie.language);
+
+    formData.append('links', [movie.movieLink]);
+    formData.append('categories', movie.categories);
+    formData.append('actors', movie.actors);
+    formData.append('genres', movie.genres);
+
+    return formData;
 }
 
 const data = {
@@ -139,6 +127,8 @@ const App = {
     convertMinsToHours,
     displayList,
     generateArrayOfNumbers,
+    getSelectOptionValues,
+    createFormData,
 }
 
 export default App;

@@ -20,6 +20,7 @@ import DashboardLayout from "./pages/Admin/Layout";
 import Dashboard from "./pages/Admin/Dashboard";
 import Movies from "./pages/Admin/Movies/List";
 import CreateAMovie from "./pages/Admin/Movies/Create";
+import EditAMovie from "./pages/Admin/Movies/Edit";
 
 function App(){
   return (
@@ -48,6 +49,7 @@ function App(){
 
           <Route path="movies" element={<Movies />} />
           <Route path="movies/create" element={<CreateAMovie />} />
+          <Route path="movies/edit/:movie_name" element={<EditAMovie />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />

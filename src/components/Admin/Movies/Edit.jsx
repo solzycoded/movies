@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import SelectCategory from "../Categories/Select";
 import SelectGenre from "../Genres/Select";
 import SelectLanguage from "../Languages/Select";
-import SelectActor from "../Actors/Select";
 
 import App from "../../../common/util";
+import SelectActor from "../Actors/Select";
 import FetchRequest from "../../../assets/js/request/fetch";
 
-const CreateMovie = () => {
+const EditMovie = () => {
+    const { movie_name } = useParams();
+  
     const [name, setMovieName]               = useState("");
     const [rating, setMovieRating]           = useState(0);
     const [runtime, setMovieRuntime]         = useState("");
@@ -20,6 +23,11 @@ const CreateMovie = () => {
     const [movieLink, setMovieLink]          = useState("");
 
     const [error, setError]                  = useState("");
+
+    useEffect(() => {
+        // Function to run when the component loads
+        // getMoviesList();
+    }, []); // Empty dependency array ensures it runs only once on mount
 
     const configureMoviePoster = (e) => {
         setMoviePoster(e.target.value);
@@ -45,7 +53,7 @@ const CreateMovie = () => {
             setError("Movie name already exists!");
         }
 
-        (new FetchRequest("POST", "movies", data, true)).send(success, failure);
+        (new FetchRequest("PUT", "movies", data, true)).send(success, failure);
     }
 
     return (
@@ -112,7 +120,7 @@ const CreateMovie = () => {
 
                     {/* submit button */}
                     <div className="float-end mt-4">
-                        <button type="submit" className="btn btn-dark">Create</button>
+                        <button type="submit" className="btn btn-dark">Edit</button>
                     </div>
                 </form>
             </div>
@@ -120,4 +128,4 @@ const CreateMovie = () => {
     )
 }
 
-export default CreateMovie;
+export default EditMovie;

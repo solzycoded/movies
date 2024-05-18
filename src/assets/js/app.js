@@ -1,8 +1,3 @@
-// (function() {
-//     "use strict";
-
-// })()
-
 const getElementById = (selector) => {
     return document.getElementById(selector);
 }

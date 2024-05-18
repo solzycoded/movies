@@ -14,7 +14,7 @@ function SelectGenre(){
         const success = (data) => {
             setGenres(data);
         }
-
+ 
         const failure = (data) => {
             setGenres(data);
         }
