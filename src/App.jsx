@@ -49,7 +49,7 @@ function App(){
 
           <Route path="movies" element={<Movies />} />
           <Route path="movies/create" element={<CreateAMovie />} />
-          <Route path="movies/edit/:movie_name" element={<EditAMovie />} />
+          <Route path="movies/edit/:id" element={<EditAMovie />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />

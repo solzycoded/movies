@@ -155,11 +155,10 @@ const findMovieById = async (req, res) => {
 
     try {
         const movie = await Movie.findById(id)
-            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name")) // genres
-            .populate(App.createPopulateVal("actors", 'actor -_id', "actor", "name")) // actors
-            .populate(App.createPopulateVal("categories", 'category -_id', "category", "name")) // categories
-            .populate("links", "link") // links
-            .populate('language', 'name -_id') // Populate the 'language' field in the Movie document
+            .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "_id")) // genres
+            .populate(App.createPopulateVal("actors", 'actor -_id', "actor", "_id")) // actors
+            .populate(App.createPopulateVal("categories", 'category -_id', "category", "_id")) // categories
+            .populate("links", "link -_id") // links
             .exec();
 
         const success = movie!=null;

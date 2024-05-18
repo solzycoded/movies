@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import FetchRequest from "../../../assets/js/request/fetch";
+import PropTypes from "prop-types";
 
-function SelectLanguage(){
+function SelectLanguage({ selectedLanguage }){
     const [languages, setLanguages]          = useState([]);
     const [movieLanguage, setMovieLanguage] = useState("");
 
     useEffect(() => {
         // Function to run when the component loads
         allLanguages();
+        setMovieLanguage(selectedLanguage);
     }, []); // Empty dependency array ensures it runs only once on mount
 
     const allLanguages = () => {
@@ -25,7 +27,7 @@ function SelectLanguage(){
     return (
         <>
         <div className="form-floating mb-3">
-            <select className="form-select" id="language"  value={movieLanguage} onChange={(e) => setMovieLanguage(e.target.value)}>
+            <select className="form-select" id="language" value={movieLanguage} onChange={(e) => setMovieLanguage(e.target.value)}>
                 <option disabled value="">Select a language</option>
                 {
                     languages.map((value, i) => {
@@ -37,6 +39,10 @@ function SelectLanguage(){
         </div>
         </>
     )
+}
+
+SelectLanguage.propTypes = {
+    selectedLanguage: PropTypes.string
 }
 
 export default SelectLanguage;

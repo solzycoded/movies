@@ -7,7 +7,7 @@ function EditAMovie(){
                 <div className="mb-4">
                     <h4 className="create-or-edit-movie-header">Edit Movie</h4>
                 </div>
-                <div className="col-12 col-md-7">
+                <div>
                     <EditMovie />
                 </div>
             </section>

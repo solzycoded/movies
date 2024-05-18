@@ -64,7 +64,7 @@ const MoviesList = () => {
                                                 </form>
                                             </div>
                                             <div className="mb-2">
-                                                <NavLink to={`/dashboard/movies/edit/${movie.name}`} className="btn btn-secondary">Edit <i className="bi bi-arrow-right"></i></NavLink>
+                                                <NavLink to={`/dashboard/movies/edit/${movie.id}`} className="btn btn-secondary">Edit <i className="bi bi-arrow-right"></i></NavLink>
                                             </div>
                                         </div>
                                     </td>
