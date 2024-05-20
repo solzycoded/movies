@@ -9,16 +9,26 @@ cloud.config({
   secure: true,
 });
 
+const uploader = cloudinary.uploader;
+
 async function upload(file) {
-  const res = await cloudinary.uploader.upload(file, {
+  const res = await uploader.upload(file, {
     resource_type: "auto",
+    folder: "movies"
   });
 
   return res;
 }
 
+async function deleteImage(publicId) {
+  const res = await uploader.destroy(publicId);
+
+  return res;
+}
+
 const Image = {
-  upload
+  upload,
+  deleteImage
 }
 
 export default Image;

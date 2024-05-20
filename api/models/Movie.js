@@ -35,8 +35,8 @@ const fields = {
         required: true,
     },
     poster: {
-        type: String,
-        required: false,
+        url: String,
+        public_id: String
     },
     release_year: {
         type: Number,

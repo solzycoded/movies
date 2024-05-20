@@ -11,15 +11,15 @@ import App from '../util/app.js';
 
 const createMovie = async (req, res) => {
     const { name, about, rating, runtime, language, trailer, releaseYear, actors, genres, categories, links } = req.body;
-
-    if(!name || !runtime || !language || (!links && links.length==0)) {
+//  || (!links && links.length==0)
+    if(!name || !runtime || !language || !trailer) {
         return res.status(500).json({ success: false, message: "Some fields are missing" });
     }
 
     try {
         const poster = await MovieService.uploadPosterToTheCloud(req);
 
-        const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster });
+        const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster: {url: poster.url, public_id: poster.public_id} });
         const newMovie = await movie.save(); // create movie
 
         let movieId = newMovie._id;
@@ -40,7 +40,7 @@ const listMovie = async (req, res) => {
             .populate(App.createPopulateVal("genres", 'genre -_id', "genre", "name -_id")) // genres
             .populate(App.createPopulateVal("actors", 'actor -_id', "actor", "name -_id")) // actors
             .populate(App.createPopulateVal("categories", 'category -_id', "category", "name -_id")) // categories
-            .populate("links", "name") // links
+            .populate("links", "link") // links
             .populate('language', 'name -_id') // Populate the 'language' field in the Movie document
             .exec();
 
@@ -168,6 +168,41 @@ const findMovieById = async (req, res) => {
     }
 };
 
+const updateMovie = async (req, res) => {
+    const { id } = req.params;
+    const { name, about, rating, runtime, language, trailer, releaseYear, actors, genres, categories, links } = req.body;
+//  || (!links && links.length==0)
+
+    if(!id || !name || !runtime || !language) {
+        return res.status(500).json({ success: false, data: "Fields are missing!" });
+    }
+
+    try {
+        const data   = { name, about, rating, runtime, language, trailer, release_year: releaseYear };
+
+        const poster = await MovieService.uploadPosterToTheCloud(req);
+
+        if(poster!=null){
+            await MovieService.deletePosterFromTheCloud(id); // delete poster
+
+            data.poster = {url: poster.url, public_id: poster.public_id};
+        }
+
+        const movie = await Movie.findByIdAndUpdate(id, data, { new: true }).exec();
+
+        // update...
+        MovieGenreService.updateMovieGenre(id, genres); // movie genre document
+        MovieActorService.updateMovieActor(id, actors); // movie actor document
+        MovieCategoryService.updateMovieCategory(id, categories); // movie category document
+        MovieLinkService.updateMovieLink(id, links); // movie links document
+
+        const success = movie!=null;
+        res.status(201).json({ success, data: movie });
+    } catch (error) {
+        res.status(400).json({ success: false, data: error.message });
+    }
+};
+
 // export CONTROLLER FUNCTIONS
 export default {
     createMovie,
@@ -175,5 +210,6 @@ export default {
     listMovieByCategory,
     listMovieByGenre,
     getMovie,
-    findMovieById
+    findMovieById,
+    updateMovie
 }

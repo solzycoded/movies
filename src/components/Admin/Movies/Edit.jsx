@@ -23,6 +23,7 @@ const EditMovie = () => {
     const [posterFile, setMoviePosterFile]   = useState({});
     const [about, setAboutMovie]             = useState("");
     const [movieLink, setMovieLink]          = useState("");
+    const [posterSrc, setPosterSrc]          = useState("");
 
     const [error, setError]                  = useState("");
 
@@ -31,14 +32,18 @@ const EditMovie = () => {
         const getMovieDetails = () => {
             const success = (data) => {
                 setMovie(data);
+
                 // set the values of the fields
                 setMovieName(data.name);
                 setMovieRating(data.rating);
                 setMovieRuntime(data.runtime);
                 setMovieTrailer(data.trailer);
-                setMovieReleaseYear(data.release_year);
+                setMovieReleaseYear((data.release_year==null ? "" : data.release_year));
                 setAboutMovie(data.about);
-                setMovieLink(data.links[0].link)
+                setPosterSrc(data.poster.url);
+
+                const link = data.links.length > 0 ? data.links[0].link : "";
+                setMovieLink(link);
             }
 
             const failure = (data) => {
@@ -72,22 +77,21 @@ const EditMovie = () => {
         }
 
         const failure = (data) => {
-            setError("Movie name already exists!");
+            setError(data);
         }
 
-        (new FetchRequest("PUT", "movies", data, true)).send(success, failure);
+        (new FetchRequest("PUT", `movies/${id}`, data, true)).send(success, failure);
     }
 
     return movie && (
-        <>
-
+        <> 
             <div className="form-group container-fluid p-0">
                 <form onSubmit={submitMovie} className="row">
                     <div className="col-12 mb-2 text-danger fw-bold text-small">{error}</div>
                     {/* name */}
                     <div className="col-12 col-md-6">
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="movie-name" placeholder="what's the movie's name?" value={name} onChange={(e) => setMovieName(e.target.value)}  />
+                            <input type="text" className="form-control" id="movie-name" placeholder="what's the movie's name?" value={name} onChange={(e) => setMovieName(e.target.value)} />
                             <label htmlFor="movie-name">Movie Name</label>
                         </div>
                         {/* select actors */}
@@ -138,7 +142,7 @@ const EditMovie = () => {
                         {/* upload movie poster */}
                         <div className="d-flex justify-content-start">
                             <div className="me-2">
-                                <img src={movie.poster} className="img-fluid" width="80" height="30" />
+                                <img src={posterSrc} className="img-fluid" width="80" height="30" />
                             </div>
                             <div className="input-group mb-3">
                                 <input type="file" className="form-control" id="movie-poster" accept="image/*" value={poster} onChange={configureMoviePoster} />

@@ -17,6 +17,7 @@ const upload = multer({ storage });
 const myUploadMiddleware = upload.single("poster");
 
 router.post('/', myUploadMiddleware, MovieController.createMovie);
+router.put('/:id', myUploadMiddleware, MovieController.updateMovie);
 
 // export routes
 let movieRoutes = {
