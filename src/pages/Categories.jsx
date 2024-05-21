@@ -4,6 +4,7 @@ import CategorySection from "../components/Categories/Section";
 
 function Categories(){
     const [categories, setCategories] = useState([]);
+    const currentUrl                  = window.location.href;
 
     useEffect(() => {
         // Function to run when the component loads
@@ -27,7 +28,7 @@ function Categories(){
             <section>
                 {
                     categories.map((category, i) => {
-                        return <CategorySection category={ category } key={ i } />
+                        return <CategorySection category={ category } currentUrl={ currentUrl } key={ i } />
                     })
                 }
             </section>

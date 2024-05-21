@@ -1,29 +1,40 @@
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-// import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import MovieRating from './MovieRating';
 import MovieGenreItem from "./MovieGenreItem";
 
 import '../assets/css/MovieGridItem.css';
 
-function MovieGridItem({ movie }) {
+function MovieGridItem({ movie, currentUrl, urlPrefix }) {
     if (movie === undefined || movie == null) {
         return;
     }
 
-    // const [currentUrl, setCurrentUrl] = useState("");
+    useEffect(() => {
+        getMainUrl();
+    }, []); // Empty dependency array to run this effect only once
 
-    // useEffect(() => {
-    //     // Update the state with the current URL when the component mounts
-    //     setCurrentUrl(window.location.href);
-    // }, []); // Empty dependency array to run this effect only once
+    const getMainUrl = () => {
+        let splitUrl = currentUrl.split("/");
+
+        if(splitUrl.length > 3 && splitUrl[3].trim()!=""){
+            splitUrl = splitUrl.splice(3);
+
+            return "/" + splitUrl.join("/") + "/";
+        }
+
+        return "";
+    }
 
     const navigate = useNavigate();
     const openMovieDetails = (e) => {
         e.preventDefault();
 
-        navigate(`/${movie.name}`);
+        let urlPref = !urlPrefix ? "" : urlPrefix;
+
+        navigate(`${getMainUrl() + urlPref + movie.name}`);
     };
 
     const genres = movie.genres==null ? [] : movie.genres;
@@ -31,7 +42,7 @@ function MovieGridItem({ movie }) {
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 cursor-pointer mb-4" onClick={openMovieDetails} id={'movie-' + movie.id}>
             <div className="card position-relative shadow-sm bg-body rounded border-0">
-                <img src={movie.poster} className="card-img-top movie-grid-item-poster" alt="movie poster" />
+                <img src={movie.poster.url} className="card-img-top movie-grid-item-poster" alt="movie poster" />
                 <div className="card-body">
                     <h5 className="card-title text-capitalize fs-6">{movie.name}</h5>
                     <p className="card-text">
@@ -49,7 +60,9 @@ function MovieGridItem({ movie }) {
 }
 
 MovieGridItem.propTypes = {
-    movie: PropTypes.object.isRequired
+    movie: PropTypes.object.isRequired,
+    currentUrl: PropTypes.string,
+    urlPrefix: PropTypes.string
 }
 
 export default MovieGridItem;

@@ -16,7 +16,7 @@ function MovieInfo() {
         return;
     }
 
-    const [movie, setMovie] = useState({});
+    const [movie, setMovie] = useState(null);
 
     useEffect(() => {
         // Function to run when the component loads
@@ -35,12 +35,12 @@ function MovieInfo() {
         (new FetchRequest("GET", `movies/${movie_name}`)).send(success, failure);
     }
 
-    return movie ? (
+    return movie ? movie && (
         <div className="shadow-lg p-3 mb-5 bg-body rounded">
             <div className="card border-0">
                 <div className="row">
                     <div className="col-12 col-lg-5 col-md-4 col-sm-12">
-                        <img src={movie.poster} className="img-fluid rounded w-100 movie-info-poster" alt="movie poster" />
+                        <img src={movie.poster.url} className="img-fluid rounded w-100 movie-info-poster" alt="movie poster" />
                     </div>
                     <div className="col-12 col-lg-7 col-md-8 col-sm-12">
                         <div className="card-body ps-0">

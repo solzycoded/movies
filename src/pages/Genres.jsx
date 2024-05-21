@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react"
-import FetchRequest from "../assets/js/request/fetch"
+import { useState, useEffect } from "react";
+import FetchRequest from "../assets/js/request/fetch";
 import CategorySection from "../components/Genres/Section";
 
 function Genres(){
     const [genres, setGenres] = useState([]);
+    const currentUrl          = window.location.href;
 
     useEffect(() => {
-        // Function to run when the component loads
         allGenres();
     }, []); // Empty dependency array ensures it runs only once on mount
 
@@ -27,7 +27,7 @@ function Genres(){
             <section>
                 {
                     genres.map((genre, i) => {
-                        return <CategorySection genre={ genre } key={ i } />
+                        return <CategorySection genre={ genre } currentUrl={ currentUrl } key={ i } />
                     })
                 }
             </section>
