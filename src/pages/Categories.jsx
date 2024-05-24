@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import FetchRequest from "../assets/js/request/fetch"
 import CategorySection from "../components/Categories/Section";
+import BreadCrumb from "../components/Breadcrumb/Section";
 
 function Categories(){
     const [categories, setCategories] = useState([]);
@@ -25,6 +26,7 @@ function Categories(){
 
     return (
         <>
+            <BreadCrumb currentUrl={ currentUrl } />
             <section>
                 {
                     categories.map((category, i) => {

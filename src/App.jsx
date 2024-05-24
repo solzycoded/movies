@@ -38,9 +38,9 @@ function App(){
           <Route path="genres/:genre" element={<Genre />} />
 
           {/* movie details */}
-          <Route path="/:movie_name" element={<MovieInfo />} />
-          <Route path="/genres/:genre-name/:movie_name" element={<MovieInfo />} />
-          <Route path="/categories/:category-name/:movie_name" element={<MovieInfo />} />
+          <Route path=":movie_name" element={<MovieInfo />} />
+          <Route path="genres/:genre-name/:movie_name" element={<MovieInfo />} />
+          <Route path="categories/:category-name/:movie_name" element={<MovieInfo />} />
 
           {/* no page */}
           <Route path="*" element={<NoPage />} />

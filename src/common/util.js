@@ -53,6 +53,18 @@ const createFormData = (movie) => {
     return formData;
 }
 
+const getMainUrl = (currentUrl) => {
+    let splitUrl = currentUrl.split("/");
+
+    if(splitUrl.length > 3 && splitUrl[3].trim()!=""){
+        splitUrl = splitUrl.splice(3);
+
+        return "/" + splitUrl.join("/") + "/";
+    }
+
+    return "";
+}
+
 const data = {
     movies: [
         {
@@ -129,6 +141,7 @@ const App = {
     generateArrayOfNumbers,
     getSelectOptionValues,
     createFormData,
+    getMainUrl,
 }
 
 export default App;

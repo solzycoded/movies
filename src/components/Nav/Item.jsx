@@ -1,13 +1,11 @@
 import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-function NavItem({ icon, link, title }){
+function NavItem({ link, title }){
     return (
         <>
-            <li>
-                <NavLink to={ link } className="nav-link">
-                    <i className={`bi bi-${icon}`}></i> <span>{ title }</span>
-                </NavLink>
+            <li className="nav-item">
+                <NavLink to={link} className="nav-link text-white">{ title }</NavLink>
             </li>
         </>
     )
@@ -15,8 +13,7 @@ function NavItem({ icon, link, title }){
 
 NavItem.propTypes = {
     link: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
 }
 
 export default NavItem;

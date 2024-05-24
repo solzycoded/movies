@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from "prop-types";
 
 import MovieRating from './MovieRating';
 import MovieGenreItem from "./MovieGenreItem";
+
+import App from "../common/util";
 
 import '../assets/css/MovieGridItem.css';
 
@@ -12,29 +13,13 @@ function MovieGridItem({ movie, currentUrl, urlPrefix }) {
         return;
     }
 
-    useEffect(() => {
-        getMainUrl();
-    }, []); // Empty dependency array to run this effect only once
-
-    const getMainUrl = () => {
-        let splitUrl = currentUrl.split("/");
-
-        if(splitUrl.length > 3 && splitUrl[3].trim()!=""){
-            splitUrl = splitUrl.splice(3);
-
-            return "/" + splitUrl.join("/") + "/";
-        }
-
-        return "";
-    }
-
     const navigate = useNavigate();
     const openMovieDetails = (e) => {
         e.preventDefault();
 
         let urlPref = !urlPrefix ? "" : urlPrefix;
 
-        navigate(`${getMainUrl() + urlPref + movie.name}`);
+        navigate(`${App.getMainUrl(currentUrl) + urlPref + movie.name}`);
     };
 
     const genres = movie.genres==null ? [] : movie.genres;

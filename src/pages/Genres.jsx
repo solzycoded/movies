@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FetchRequest from "../assets/js/request/fetch";
 import CategorySection from "../components/Genres/Section";
+import BreadCrumb from "../components/Breadcrumb/Section";
 
 function Genres(){
     const [genres, setGenres] = useState([]);
@@ -24,6 +25,7 @@ function Genres(){
 
     return (
         <>
+            <BreadCrumb currentUrl={ currentUrl } />
             <section>
                 {
                     genres.map((genre, i) => {

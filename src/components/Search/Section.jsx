@@ -37,7 +37,7 @@ const Search = () => {
 
     return (
         <>
-            <div className="input-group w-100">
+            <div className="d-flex" role="search">
                 <div className="position-relative search-container">
                     <div className="input-group mb-1 search-bar">
                         <div className={ `search-bar-section ${showSearch}` }>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import FetchRequest from "../assets/js/request/fetch"
 import MovieGrid from "../components/MovieGrid"
 import { useParams } from "react-router-dom";
+import BreadCrumb from "../components/Breadcrumb/Section";
 
 function Category(){
     const [movies, setMovies] = useState([]);
@@ -26,6 +27,7 @@ function Category(){
 
     return (
         <>
+            <BreadCrumb currentUrl={ window.location.href } />
             <section>
                 <div className="container-fluid">
                     <h3 className="text-capitalize">{ category }</h3>

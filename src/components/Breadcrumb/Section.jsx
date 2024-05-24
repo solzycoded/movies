@@ -1,31 +1,68 @@
-import PropTypes from "prop-types"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const BreadCrumb = ({ url }) => {
+import App from "../../common/util";
+import BreadCrumbItem from "./Item";
+
+import PropTypes from "prop-types"
+
+const BreadCrumb = ({ currentUrl }) => {
+    const [breadCrumbs, setBreadCrumbs] = useState(null);
+
     useEffect(() => {
-        splitUrl();
+        console.log(currentUrl);
+
+        setBreadCrumbs(makeBreadCrumbItems());
     }, []); // Empty dependency array ensures it runs only once on mount
 
     const splitUrl = () => {
-        const urlArr = url.split("/");
-        console.log(urlArr);
+        const urlArr = App.getMainUrl(currentUrl);
+
+        const splitArr    = urlArr.split("/");
+        const newSplitArr = splitArr.filter((v) => {
+            return v!="";
+        });
+
+        return newSplitArr;
     }
 
-    return (
+    const makeBreadCrumbItems = () => {
+        const splitUrlIntoArr  = splitUrl();
+        let altSplitUrlIntoArr = splitUrlIntoArr;
+        let breadCrumbItems    = [];
+        let isActive           = true;
+
+        for (let index = splitUrlIntoArr.length - 1; index >= 0; index--) {
+            let urlLink   = "/" + altSplitUrlIntoArr.join("/");
+            const element = altSplitUrlIntoArr.pop();
+
+            breadCrumbItems.push(<BreadCrumbItem key={ index } link={ urlLink } title={ element } isActive={ isActive } />);
+
+            isActive      = isActive ? false : isActive;
+        }
+
+        return breadCrumbItems.reverse();
+    }
+
+    return breadCrumbs && (
         <>
-            <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><a href="#">Library</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">Data</li>
-                </ol>
-            </nav>
+            <div className="container-fluid">
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                        <BreadCrumbItem link="/" title="Home" isActive={false} />
+                        {
+                            breadCrumbs.map((v) => {
+                                return v;
+                            })
+                        }
+                    </ol>
+                </nav>
+            </div>
         </>
     )
 }
 
 BreadCrumb.propTypes = {
-    url: PropTypes.string.isRequired
+    currentUrl: PropTypes.string.isRequired
 }
 
 export default BreadCrumb;
