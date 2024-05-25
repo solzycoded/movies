@@ -13,3 +13,7 @@
 #app-logo {
     height: 50px !important;
 }
+
+#main {
+    min-height: 450px;
+}

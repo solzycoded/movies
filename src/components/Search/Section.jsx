@@ -65,12 +65,12 @@ const Search = () => {
                         <div className="list-group search-results-dropdown-section">
                             {
                                 movies.map((movie, i) => {
-                                    return <NavLink to={`/movies/${movie.name}`} key={ i } className="list-group-item list-group-item-action d-flex justify-content-start">
+                                    return <NavLink to={`/${movie.name}`} key={ i } className="list-group-item list-group-item-action d-flex justify-content-start">
                                         <div>
-                                            <img src={movie.poster} className="img-fluid" width="25" />
+                                            <img src={movie.poster.url} className="img-fluid" width="40" />
                                         </div>
                                         <div className="ms-2">
-                                            <p className="p-0 m-0 text-capitalize">{ movie.name }</p>
+                                            <p className="p-0 m-0 text-capitalize"><small>{ movie.name }</small></p>
                                             <small className="p-0 text-secondary">{ movie.rating }</small>
                                         </div>
                                     </NavLink>

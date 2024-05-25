@@ -9,8 +9,6 @@ const BreadCrumb = ({ currentUrl }) => {
     const [breadCrumbs, setBreadCrumbs] = useState(null);
 
     useEffect(() => {
-        console.log(currentUrl);
-
         setBreadCrumbs(makeBreadCrumbItems());
     }, []); // Empty dependency array ensures it runs only once on mount
 
