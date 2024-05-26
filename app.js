@@ -19,6 +19,8 @@ import searchMovieRoutes from "./api/routes/SearchMovieRoutes.js";
 import subscriberRoutes from "./api/routes/SubscriberRoutes.js";
 import tvShowRoutes from "./api/routes/TvShowRoutes.js";
 import tvShowLinkRoutes from "./api/routes/TvShowLinkRoutes.js";
+import franchiseRoutes from "./api/routes/FranchiseRoutes.js";
+
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
@@ -86,3 +88,6 @@ app.use('/tv-shows', tvShowRoutes.router);
 
 // tvshow link routes
 app.use('/tv-show-links', tvShowLinkRoutes.router);
+
+// franchise routes
+app.use('/franchises', franchiseRoutes.router);
