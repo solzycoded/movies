@@ -20,6 +20,7 @@ import subscriberRoutes from "./api/routes/SubscriberRoutes.js";
 import tvShowRoutes from "./api/routes/TvShowRoutes.js";
 import tvShowLinkRoutes from "./api/routes/TvShowLinkRoutes.js";
 import franchiseRoutes from "./api/routes/FranchiseRoutes.js";
+import franchiseLinkRoutes from "./api/routes/FranchiseLinkRoutes.js";
 
 
 // INITIALIZE AND START APP INSTANCE
@@ -91,3 +92,6 @@ app.use('/tv-show-links', tvShowLinkRoutes.router);
 
 // franchise routes
 app.use('/franchises', franchiseRoutes.router);
+
+// franchise link routes
+app.use('/franchise-links', franchiseLinkRoutes.router);
