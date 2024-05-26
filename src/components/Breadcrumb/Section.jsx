@@ -31,7 +31,7 @@ const BreadCrumb = ({ currentUrl }) => {
 
         for (let index = splitUrlIntoArr.length - 1; index >= 0; index--) {
             let urlLink   = "/" + altSplitUrlIntoArr.join("/");
-            const element = altSplitUrlIntoArr.pop();
+            const element = altSplitUrlIntoArr.pop().replaceAll("%20", " ");
 
             breadCrumbItems.push(<BreadCrumbItem key={ index } link={ urlLink } title={ element } isActive={ isActive } />);
 

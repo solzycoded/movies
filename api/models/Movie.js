@@ -28,7 +28,12 @@ const fields = {
     },
     language:  {
         type: Schema.Types.ObjectId, 
-        ref: 'Language'
+        ref: 'Language',
+        actor: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Actor',
+            required: true,
+        },
     },
     trailer: {
         type: String,
