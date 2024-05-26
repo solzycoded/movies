@@ -17,13 +17,17 @@ const CreateMovie = () => {
     const [poster, setMoviePoster]           = useState("");
     const [posterFile, setMoviePosterFile]   = useState({});
     const [about, setAboutMovie]             = useState("");
-    const [movieLink, setMovieLink]          = useState("");
+    const [movieVideo, setMovieVideo]          = useState("");
 
     const [error, setError]                  = useState("");
 
     const configureMoviePoster = (e) => {
         setMoviePoster(e.target.value);
         setMoviePosterFile(e.target.files[0]);
+    }
+
+    const configureMovieVideo = (e) => {
+        setMovieVideo(e.target.value);
     }
 
     const submitMovie = (e) => {
@@ -34,7 +38,7 @@ const CreateMovie = () => {
         const actors = App.getSelectOptionValues("#actor");
         const genres = App.getSelectOptionValues("#genre");
 
-        let data = App.createFormData({language, categories, actors, genres, posterFile, name, rating, runtime, trailer, releaseYear, about, movieLink});
+        let data = App.createFormData({language, categories, actors, genres, posterFile, name, rating, runtime, trailer, releaseYear, about, movieVideo});
 
         const success = (data) => {
             setError("");
@@ -84,11 +88,6 @@ const CreateMovie = () => {
                         <input type="text" className="form-control" id="movie-trailer" placeholder="what's the movie's trailer?" value={trailer} onChange={(e) => setMovieTrailer(e.target.value)}  />
                         <label htmlFor="movie-trailer">Movie Trailer</label>
                     </div>
-                    {/* to be removed later (provide download links) */}
-                    <div className="form-floating mb-3">
-                        <input type="url" className="form-control" id="movie-link" placeholder="what's the movie's link?" value={movieLink} onChange={(e) => setMovieLink(e.target.value)}  />
-                        <label htmlFor="movie-link">Movie Link</label>
-                    </div>
                     {/* runtime */}
                     <div className="form-floating mb-3">
                         <input type="number" className="form-control" id="movie-runtime" placeholder="what's the movie's runtime?" value={runtime} onChange={(e) => setMovieRuntime(e.target.value)}  />
@@ -102,7 +101,16 @@ const CreateMovie = () => {
                     {/* upload movie poster */}
                     <div className="input-group mb-3">
                         <input type="file" className="form-control" id="movie-poster" accept="image/*" value={poster} onChange={configureMoviePoster} />
-                        <label className="input-group-text" htmlFor="movie-poster">Upload</label>
+                        <label className="input-group-text" htmlFor="movie-poster">Upload Poster</label>
+                    </div>
+                    {/* to be removed later (provide download links) */}
+                    {/* <div className="form-floating mb-3">
+                        <input type="url" className="form-control" id="movie-video" placeholder="what's the movie's link?" value={movieVideo} onChange={(e) => setMovieVideo(e.target.value)}  />
+                        <label htmlFor="movie-video">Movie Link</label>
+                    </div> */}
+                    <div className="input-group mb-3">
+                        <input type="file" className="form-control" id="movie-video" accept=".mp4, .mkv, .avi" value={movieVideo} onChange={configureMovieVideo} />
+                        <label className="input-group-text" htmlFor="movie-video">Upload Video</label>
                     </div>
                     {/* rating */}
                     <div className="mb-2">

@@ -45,7 +45,7 @@ const createFormData = (movie) => {
     formData.append('about', movie.about);
     formData.append('language', movie.language);
 
-    formData.append('links', [movie.movieLink]);
+    formData.append('video', [movie.movieVideo]);
     formData.append('categories', movie.categories);
     formData.append('actors', movie.actors);
     formData.append('genres', movie.genres);
