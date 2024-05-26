@@ -30,7 +30,7 @@ const fields = {
 let schema = Model.createSchema(fields);
 
 schema.virtual('links', {
-    ref: 'TvShowLinks',
+    ref: 'TvShowLink',
     localField: '_id',
     foreignField: 'tv_show'
 });
