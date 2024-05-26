@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Model from "./model.js";
 
 const fields = {
-    movie: {
+    franchise: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Franchise'
     },

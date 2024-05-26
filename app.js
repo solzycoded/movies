@@ -21,7 +21,7 @@ import tvShowRoutes from "./api/routes/TvShowRoutes.js";
 import tvShowLinkRoutes from "./api/routes/TvShowLinkRoutes.js";
 import franchiseRoutes from "./api/routes/FranchiseRoutes.js";
 import franchiseLinkRoutes from "./api/routes/FranchiseLinkRoutes.js";
-
+import franchiseActorRoutes from "./api/routes/FranchiseActorRoutes.js";
 
 // INITIALIZE AND START APP INSTANCE
 const app  = express();
@@ -72,7 +72,7 @@ app.use('/movie-links', movieLinkRoutes.router);
 // movie category routes
 app.use('/movie-categories', movieCategoryRoutes.router);
 
-// movie actor routes
+// movie actor routes 
 app.use('/movie-actors', movieActorRoutes.router);
 
 // movie genre routes
@@ -95,3 +95,6 @@ app.use('/franchises', franchiseRoutes.router);
 
 // franchise link routes
 app.use('/franchise-links', franchiseLinkRoutes.router);
+
+// franchise actor routes
+app.use('/franchise-actors', franchiseActorRoutes.router);
