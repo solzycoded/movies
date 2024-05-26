@@ -29,12 +29,12 @@ const fields = {
 
 let schema = Model.createSchema(fields);
 
-schema.virtual('links', {
-    ref: 'TvShowLinks',
-    localField: '_id',
-    foreignField: 'tv_show'
-});
+// schema.virtual('links', {
+//     ref: 'TvShowLinks',
+//     localField: '_id',
+//     foreignField: 'tv_show'
+// });
 
-const Actor = Model.schemaModel("TvShow", fields, schema);
+const TvShow = Model.schemaModel("TvShow", fields, schema);
 
-export default Actor;
+export default TvShow;
