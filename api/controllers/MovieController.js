@@ -17,20 +17,19 @@ const createMovie = async (req, res) => {
     }
 
     try {
-        // const poster = await MovieService.uploadMediaToTheCloud(req.files.poster);
+        const poster = await MovieService.uploadMediaToTheCloud(req.files.poster);
 
-        // const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster: {url: poster.url, public_id: poster.public_id} });
-        // const newMovie = await movie.save(); // create movie
+        const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster: {url: poster.url, public_id: poster.public_id} });
+        const newMovie = await movie.save(); // create movie
 
-        let movieId = 203923;
-        // newMovie._id;
-        // MovieActorService.createMovieActor(movieId, actors); // store actors of movie
-        // MovieGenreService.createMovieGenre(movieId, genres); // store genres of movie
-        // MovieCategoryService.createMovieCategory(movieId, categories); // store categories of movie
+        let movieId = newMovie._id;
+        MovieActorService.createMovieActor(movieId, actors); // store actors of movie
+        MovieGenreService.createMovieGenre(movieId, genres); // store genres of movie
+        MovieCategoryService.createMovieCategory(movieId, categories); // store categories of movie
 
-        MovieLinkService.createMovieLink(movieId, req.files.video); // store download links of movie
+        // MovieLinkService.createMovieLink(movieId, req.files.video); // store download links of movie
 
-        // res.status(201).json({ success: true, data: newMovie });
+        res.status(201).json({ success: true, data: newMovie });
     } catch (error) {
         console.log(error);
         res.status(202).json({ success: false, data: error.message });

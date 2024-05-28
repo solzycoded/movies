@@ -14,7 +14,8 @@ router.get('/by-id/:id', MovieController.findMovieById);
 // define routes to create a new movie with an image
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-const myUploadMiddleware = upload.fields([{ name: 'poster', maxCount: 1 }, { name: 'video', maxCount: 1 }]);
+const myUploadMiddleware = upload.fields([{ name: 'poster', maxCount: 1 }]);
+// , { name: 'video', maxCount: 1 }
 
 router.post('/', myUploadMiddleware, MovieController.createMovie);
 router.put('/:id', myUploadMiddleware, MovieController.updateMovie);
