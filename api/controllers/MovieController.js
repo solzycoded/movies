@@ -182,9 +182,9 @@ const updateMovie = async (req, res) => {
     try {
         const data   = { name, about, rating, runtime, language, trailer, release_year: releaseYear };
 
-        const poster = await MovieService.uploadPosterToTheCloud(req);
+        const poster = await MovieService.uploadMediaToTheCloud(req.files.poster);
         if(poster!=null){
-            await MovieService.deletePosterFromTheCloud(id); // delete poster
+            await MovieService.deleteMediaFromTheCloud(id); // delete poster
 
             data.poster = {url: poster.url, public_id: poster.public_id};
         }

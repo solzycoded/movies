@@ -68,8 +68,8 @@ const EditMovie = () => {
         const categories = App.getSelectOptionValues("#category");
         const actors = App.getSelectOptionValues("#actor");
         const genres = App.getSelectOptionValues("#genre");
-
-        let data = App.createFormData({language, categories, actors, genres, posterFile, name, rating, runtime, trailer, releaseYear, about, movieLink});
+        // , movieLink
+        let data = App.createFormData({language, categories, actors, genres, posterFile, name, rating, runtime, trailer, releaseYear, about});
 
         const success = (data) => {
             setError("");
