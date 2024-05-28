@@ -10,27 +10,30 @@ import App from '../util/app.js';
 
 
 const createMovie = async (req, res) => {
-    const { name, about, rating, runtime, language, trailer, releaseYear, actors, genres, categories, links } = req.body;
-//  || (!links && links.length==0)
+    const { name, about, rating, runtime, language, trailer, releaseYear, actors, genres, categories } = req.body;
+
     if(!name || !runtime || !language || !trailer) {
         return res.status(500).json({ success: false, message: "Some fields are missing" });
     }
 
     try {
-        const poster = await MovieService.uploadPosterToTheCloud(req);
+        // const poster = await MovieService.uploadMediaToTheCloud(req.files.poster);
 
-        const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster: {url: poster.url, public_id: poster.public_id} });
-        const newMovie = await movie.save(); // create movie
+        // const movie    = new Movie({ name, about, rating, runtime, language, trailer, release_year: releaseYear, poster: {url: poster.url, public_id: poster.public_id} });
+        // const newMovie = await movie.save(); // create movie
 
-        let movieId = newMovie._id;
-        MovieActorService.createMovieActor(movieId, actors); // store actors of movie
-        MovieGenreService.createMovieGenre(movieId, genres); // store genres of movie
-        MovieCategoryService.createMovieCategory(movieId, categories); // store categories of movie
-        MovieLinkService.createMovieLink(movieId, links); // store download links of movie
+        let movieId = 203923;
+        // newMovie._id;
+        // MovieActorService.createMovieActor(movieId, actors); // store actors of movie
+        // MovieGenreService.createMovieGenre(movieId, genres); // store genres of movie
+        // MovieCategoryService.createMovieCategory(movieId, categories); // store categories of movie
 
-        res.status(201).json({ success: true, data: newMovie });
+        MovieLinkService.createMovieLink(movieId, req.files.video); // store download links of movie
+
+        // res.status(201).json({ success: true, data: newMovie });
     } catch (error) {
-        res.status(202).json({ success: false, message: error.message });
+        console.log(error);
+        res.status(202).json({ success: false, data: error.message });
     }
 };
 
@@ -181,7 +184,6 @@ const updateMovie = async (req, res) => {
         const data   = { name, about, rating, runtime, language, trailer, release_year: releaseYear };
 
         const poster = await MovieService.uploadPosterToTheCloud(req);
-
         if(poster!=null){
             await MovieService.deletePosterFromTheCloud(id); // delete poster
 

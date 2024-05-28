@@ -1,30 +1,31 @@
-import Image from '../services/ImageService.js';
+import Media from './MediaService.js';
 import Movie from '../models/Movie.js';
 
 import { Buffer } from "node:buffer";
 
 
-const uploadPosterToTheCloud = async (req) => {
-    if(req.file==null){
+const uploadMediaToTheCloud = async (mediaObj) => {
+    if(mediaObj==null){
         return null;
     }
 
-    const b64    = Buffer.from(req.file.buffer).toString("base64");
-    let dataURI  = "data:" + req.file.mimetype + ";base64," + b64;
-    const cldRes = await Image.upload(dataURI);
+    mediaObj     = mediaObj[0];
+    const b64    = Buffer.from(mediaObj.buffer).toString("base64");
+    let dataURI  = "data:" + mediaObj.mimetype + ";base64," + b64;
+    const cldRes = await Media.upload(dataURI);
 
     return {public_id: cldRes.public_id, url: cldRes.url};
 }
 
-const deletePosterFromTheCloud = async (movieId) => {
-    const publicId = await getPosterPublicId(movieId);
+const deleteMediaFromTheCloud = async (movieId) => {
+    const publicId = await getMediaPublicId(movieId);
 
-    return await Image.deleteImage(publicId);
+    return await Media.deleteMedia(publicId);
 }
 
-const getPosterPublicId = async (movieId) => {
+const getMediaPublicId = async (movieId) => {
     try {
-        const movie = await Movie.findById(movieId).exec()
+        const movie = await Movie.findById(movieId).exec();
 
         return movie ? movie.poster.public_id : null;
     } catch (error) {
@@ -34,9 +35,8 @@ const getPosterPublicId = async (movieId) => {
 }
 
 const MovieService = {
-    uploadPosterToTheCloud,
-    deletePosterFromTheCloud,
-    getPosterPublicId,
+    uploadMediaToTheCloud,
+    deleteMediaFromTheCloud
 }
 
 export default MovieService;

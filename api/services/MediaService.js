@@ -13,22 +13,22 @@ const uploader = cloudinary.uploader;
 
 async function upload(file) {
   const res = await uploader.upload(file, {
+    folder: "movies",
     resource_type: "auto",
-    folder: "movies"
   });
 
   return res;
 }
 
-async function deleteImage(publicId) {
+async function deleteMedia(publicId) {
   const res = await uploader.destroy(publicId);
 
   return res;
 }
 
-const Image = {
+const Media = {
   upload,
-  deleteImage
+  deleteMedia
 }
 
-export default Image;
+export default Media;

@@ -24,7 +24,12 @@ export default class FetchRequest {
                 'Content-Type': 'application/json',
             }
         }
-
+        // else {
+            // options.headers = {
+            //     'Content-Type': this.isFormData ? 'multipart/form-data' : 'application/json',
+            // }
+        // }
+    
         return options;
     }
 

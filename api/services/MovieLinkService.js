@@ -1,14 +1,17 @@
 import MovieLink from '../models/MovieLink.js';
+import MovieService from './MovieService.js';
 
-const createMovieLink = async (movie, links) => {
+const createMovieLink = async (movie, video) => {
     try {
-        if(links.length > 0){
-            const data = createMovieLinkData(movie, links.split(","));
+        if(video!=null){
+            let videoLink = await MovieService.uploadMediaToTheCloud(video);
 
-            insertManyMovieLink(data);
+            // const data = createMovieLinkData(movie, links.split(","));
+
+            // insertManyMovieLink(data);
         }
-
     } catch (error) {
+        console.log(error);
         return;
     }
 };
