@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import "../../../assets/css/movies-list.css";
-import { useEffect, useState } from "react";
+
 import FetchRequest from "../../../assets/js/request/fetch";
 
 const MoviesList = () => {

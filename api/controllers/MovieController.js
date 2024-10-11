@@ -200,6 +200,7 @@ const updateMovie = async (req, res) => {
         const success = movie!=null;
         res.status(201).json({ success, data: movie });
     } catch (error) {
+        console.log(error);
         res.status(400).json({ success: false, data: error.message });
     }
 };

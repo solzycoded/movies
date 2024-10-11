@@ -20,7 +20,9 @@ const uploadMediaToTheCloud = async (mediaObj) => {
 const deleteMediaFromTheCloud = async (movieId) => {
     const publicId = await getMediaPublicId(movieId);
 
-    return await Media.deleteMedia(publicId);
+    if(publicId){
+        await Media.deleteMedia(publicId);
+    }
 }
 
 const getMediaPublicId = async (movieId) => {

@@ -48,7 +48,6 @@ const fields = {
     },
 };
 
-
 let schema = Model.createSchema(fields);
 
 // CREATE VIRTUAL FIELDS

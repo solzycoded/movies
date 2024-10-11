@@ -2,9 +2,10 @@ import Movie from '../models/Movie.js';
 
 const listMovie = async (req, res) => {
     const { search } = req.params;
-    const regexMatch = new RegExp(search, 'i');
 
     try {
+        const regexMatch = new RegExp(search, 'i');
+
         const movies = await Movie.find({ name: regexMatch }, 'name poster rating -_id')
             .exec();
 

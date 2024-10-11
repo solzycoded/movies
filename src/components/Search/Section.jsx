@@ -24,12 +24,17 @@ const Search = () => {
     }
 
     const filterSearchResults = () => {
+        if(!searchQuery){
+            updateMovies([]);
+            return;
+        }
+
         const success = (data) => {
             updateMovies(data);
         }
 
         const failure = (data) => {
-            updateMovies(data);
+            updateMovies([]);
         }
 
         (new FetchRequest("GET", `search-movies/${searchQuery}`)).send(success, failure);
