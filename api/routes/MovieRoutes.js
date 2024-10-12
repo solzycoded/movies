@@ -21,7 +21,7 @@ router.post('/', myUploadMiddleware, MovieController.createMovie);
 router.put('/:id', myUploadMiddleware, MovieController.updateMovie);
 
 // export routes
-let movieRoutes = {
+const movieRoutes = {
     router
 }
 

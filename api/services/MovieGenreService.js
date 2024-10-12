@@ -29,9 +29,9 @@ const updateMovieGenre = async (movie, genres) => {
             return;
         }
 
-        const data = createMovieGenreData(movie, genres.split(","));
+        await removeInvalidMovieGenres(movie);
 
-        await removeInvalidMovieGenres(data, movie);
+        const data = createMovieGenreData(movie, genres.split(","));
         await insertNewRecordsIfNotExist(data);
     } catch (error) {
         console.log(error);
@@ -69,29 +69,16 @@ const insertNewRecordsIfNotExist = async (newRecords) => {
     }
 };
 
-const removeInvalidMovieGenres = async (validPairs, movie) => {
+const removeInvalidMovieGenres = async (movie) => {
     try {
         // Find and delete MovieGenre documents not in the valid pairs
-        const result = await MovieGenre.deleteMany(deletionFilter(validPairs, movie));
+        const result = await MovieGenre.deleteMany({ movie });
 
         console.log(`Deleted ${result.deletedCount} invalid MovieGenre documents`);
     } catch (err) {
         console.error(err);
     }
 };
-
-const deletionFilter = (validPairs, movie) => {
-    if(validPairs.length > 0) {
-        return {
-            $nor: validPairs.map(pair => ({
-                movie: pair.movie,
-                genre: pair.genre,
-            }))
-        };
-    }
-
-    return { movie };
-}
 
 const createMovieGenreData = (movie, genres) => {
     let movieGenres = [];

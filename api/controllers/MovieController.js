@@ -3,7 +3,6 @@ import Movie from '../models/Movie.js';
 import MovieActorService from '../services/MovieActorService.js';
 import MovieGenreService from '../services/MovieGenreService.js';
 import MovieCategoryService from '../services/MovieCategoryService.js';
-import MovieLinkService from '../services/MovieLinkService.js';
 import MovieService from '../services/MovieService.js';
 
 import App from '../util/app.js'; 
@@ -191,16 +190,18 @@ const updateMovie = async (req, res) => {
 
         const movie = await Movie.findByIdAndUpdate(id, data, { new: true }).exec();
 
+        // console.log(movie);
+        
         // update...
         MovieGenreService.updateMovieGenre(id, genres); // movie genre document
         MovieActorService.updateMovieActor(id, actors); // movie actor document
         MovieCategoryService.updateMovieCategory(id, categories); // movie category document
-        MovieLinkService.updateMovieLink(id, links); // movie links document
+        // MovieLinkService.updateMovieLink(id, links); // movie links document
 
         const success = movie!=null;
         res.status(201).json({ success, data: movie });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(400).json({ success: false, data: error.message });
     }
 };

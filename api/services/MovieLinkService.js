@@ -32,9 +32,9 @@ const updateMovieLink = async (movie, links) => {
             return;
         }
 
-        const data = createMovieLinkData(movie, links.split(","));
+        await removeInvalidMovieLinks(movie);
 
-        await removeInvalidMovieLinks(data, movie);
+        const data = createMovieLinkData(movie, links.split(","));
         await insertNewRecordsIfNotExist(data);
     } catch (error) {
         console.log(error);
@@ -72,29 +72,16 @@ const insertNewRecordsIfNotExist = async (newRecords) => {
     }
 };
 
-const removeInvalidMovieLinks = async (validPairs, movie) => {
+const removeInvalidMovieLinks = async (movie) => {
     try {
         // Find and delete MovieLink documents not in the valid pairs
-        const result = await MovieLink.deleteMany(deletionFilter(validPairs, movie));
+        const result = await MovieLink.deleteMany({ movie });
 
         console.log(`Deleted ${result.deletedCount} invalid MovieLink documents`);
     } catch (err) {
         console.error(err);
     }
 };
-
-const deletionFilter = (validPairs, movie) => {
-    if(validPairs.length > 0) {
-        return {
-            $nor: validPairs.map(pair => ({
-                movie: pair.movie,
-                link: pair.link,
-            }))
-        };
-    }
-
-    return { movie };
-}
 
 const createMovieLinkData = (movie, links) => {
     let movieLinks = [];

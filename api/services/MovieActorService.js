@@ -29,9 +29,9 @@ const updateMovieActor = async (movie, actors) => {
             return;
         }
 
-        const data = createMovieActorData(movie, actors.split(","));
+        await removeInvalidMovieActors(movie);
 
-        await removeInvalidMovieActors(data, movie);
+        const data = createMovieActorData(movie, actors.split(","));
         await insertNewRecordsIfNotExist(data);
     } catch (error) {
         console.log(error);
@@ -69,29 +69,16 @@ const insertNewRecordsIfNotExist = async (newRecords) => {
     }
 };
 
-const removeInvalidMovieActors = async (validPairs, movie) => {
+const removeInvalidMovieActors = async (movie) => {
     try {
         // Find and delete MovieActor documents not in the valid pairs
-        const result = await MovieActor.deleteMany(deletionFilter(validPairs, movie));
+        const result = await MovieActor.deleteMany({ movie });
 
         console.log(`Deleted ${result.deletedCount} invalid MovieActor documents`);
     } catch (err) {
         console.error(err);
     }
 };
-
-const deletionFilter = (validPairs, movie) => {
-    if(validPairs.length > 0) {
-        return {
-            $nor: validPairs.map(pair => ({
-                movie: pair.movie,
-                actor: pair.actor,
-            }))
-        };
-    }
-
-    return { movie };
-}
 
 const createMovieActorData = (movie, actors) => {
     let movieActors = [];
