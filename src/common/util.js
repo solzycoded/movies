@@ -1,4 +1,3 @@
-
 // convert minutes to hours and minutes format
 const convertMinsToHours = mins => {
     let h = Math.floor(mins / 60);
@@ -27,8 +26,8 @@ const getSelectOptionValues = (selector) => {
     const options    = document.querySelector(selector).selectedOptions;
     let optionValues = [];
 
-    for (let index = 0; index < options.length; index++) {
-        optionValues.push(options[index].value);
+    for (const element of options) {
+        optionValues.push(element.value);
     }
 
     return optionValues;

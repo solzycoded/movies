@@ -13,16 +13,16 @@ import BreadCrumb from "../components/Breadcrumb/Section";
 function MovieInfo() {
     const { movie_name } = useParams();
 
-    if (movie_name === undefined) {
-        return;
-    }
-
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
         // Function to run when the component loads
         getMovieDetails();
     }, []); // Empty dependency array ensures it runs only once on mount
+
+    if (movie_name === undefined) {
+        return;
+    }
 
     const getMovieDetails = () => {
         const success = (data) => {
@@ -104,7 +104,7 @@ function MovieInfo() {
                                     (
                                         <div className="mt-3">
                                             <h6 className="card-title">Cast</h6>
-                                            <p className="card-text text-capitalize">{App.displayList(movie.actors)}</p>
+                                            <p className="card-text text-capitalize">{ App.displayList(movie.actors, ", ") }</p>
                                         </div>
                                     )
                                 }
@@ -116,10 +116,9 @@ function MovieInfo() {
                                 {
                                     <div className="mt-3">
                                         <a
-                                            className="btn btn-dark text-white fw-bolder fs-5"
+                                            className="btn btn-dark text-white fw-bolder fs-5 disabled"
                                             href={'/#'}>
-                                            Download Movie 
-                                            <i className="bi bi-download ms-2"></i>
+                                            Download Movie <i className="bi bi-download ms-2"></i>
                                         </a>
                                     </div>
                                 }
